@@ -2,6 +2,7 @@
 
 # LaTeX Overview
 
+Basic Document Structure
 ```
 \documentclass{article} % Specifies the type of document (e.g., article, report, book)
 \usepackage{amsmath}    % Include extra features like advanced math formatting
@@ -12,18 +13,21 @@ Hello, World!           % Your content goes here
 \end{document}          % End of the document
 ```
 
+Sections and Subsections
 ```
 \section{Section Title}
 \subsection{Subsection Title}
 \subsubsection{Sub-subsection Title}
 ```
 
+Mathematical Equations
 ```
 \[
 a^2 + b^2 = c^2
 \]
 ```
 
+Lists (Bulleted & Numbered)
 ```
 \begin{itemize}
   \item First item
@@ -36,6 +40,7 @@ a^2 + b^2 = c^2
 \end{enumerate}
 ```
 
+Tables
 ```
 \begin{tabular}{|c|c|c|}
 \hline
@@ -45,6 +50,7 @@ Cell 4   & Cell 5   & Cell 6   \\ \hline
 \end{tabular}
 ```
 
+Adding Images
 ```
 \usepackage{graphicx}
 
