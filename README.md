@@ -37,11 +37,11 @@ print(newarr2D)
 ```
 
 Advantages of Arrays<br>
-- ✔ Constant time access (O(1)) due to direct indexing
-- ✔ Efficient memory usage (contiguous storage, good cache locality)
-- ✔ Supported in all programming languages (widely used)
-- ✔ Simple and easy to use compared to other data structures
-- ✔ Supports multi-dimensional structures (2D, 3D arrays)
+- ✔ Constant time access (O(1)) due to direct indexing.
+- ✔ Efficient memory usage (contiguous storage, good cache locality).
+- ✔ Supported in all programming languages (widely used).
+- ✔ Simple and easy to use compared to other data structures.
+- ✔ Supports multi-dimensional structures (2D, 3D arrays).
 
 
 Disadvantages of Arrays<br>
@@ -79,6 +79,16 @@ ll.insert(20)
 ll.insert(30)
 ll.print_list()
 ```
+
+Advantages of Linked Lists<br>
+- ✔ Dynamic sizing – can grow/shrink as needed.
+- ✔ Efficient insertions and deletions – no need to shift elements.
+- ✔ More flexible memory allocation – does not require contiguous memory like arrays.
+
+Disadvantages of Linked Lists<br>
+- ✖ Extra memory for pointers – each node requires storage for links.
+- ✖ Sequential access (O(n)) – no direct indexing like arrays (O(1)).
+- ✖ More complex implementation due to pointer management.
 
 ### LaTeX Overview
 
