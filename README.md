@@ -238,3 +238,42 @@ Since `n² + 5n log n ≥ n²` for all `n > 1`, choosing `c₁ = 1` gives:<br>
 Thus, `f(n)` is **lower-bounded by `Ω(n²)`**.<br>
 
 Therefore, `n₀ = 1`, and `f(n) ∈ Θ(n²)`.<br>
+
+### Sorting Algorithms
+
+The Sorting Problem<br>
+- Input: Sequence of n numbers.
+- Output: Reordering of numbers into increasing order.
+
+Comparison-based sorting:<br>
+- Insertion Sort
+- Quicksort
+- Heapsort
+- Merge Sort
+
+Non-comparison-based sorting:<br>
+- Counting Sort
+- Radix Sort
+
+### Insertion Sort
+
+Algorithm:<br>
+- Assume the first j-1 elements are sorted.
+- Insert A[j] into the correct position.
+
+```
+def insertion_sort(A):
+    for j in range(1, len(A)):
+        key = A[j]
+        i = j - 1
+        while i >= 0 and A[i] > key:
+            A[i + 1] = A[i]
+            i -= 1
+        A[i + 1] = key
+```
+
+Time Complexity:<br>
+
+- Best Case: O(n) – when the array is already sorted.
+- Average Case: O(n²) – when elements are in random order.
+- Worst Case: O(n²) – when the array is sorted in reverse order.
