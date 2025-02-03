@@ -1,12 +1,35 @@
 # INFO6205_ProgramStructure_Algorithms
 
+# Table of Contents
+
+- [INFO6205_ProgramStructure_Algorithms](#info6205_programstructure_algorithms)
+  - [Lecture 1](#lecture-1)
+    - [Course Overview](#course-overview)
+    - [Array](#array)
+    - [Linked List](#linked-list)
+    - [LaTeX Overview](#latex-overview)
+  - [Lecture 2](#lecture-2)
+    - [Stacks (LIFO – Last In, First Out)](#stacks-lifo--last-in-first-out)
+    - [Queues (FIFO – First In, First Out)](#queues-fifo--first-in-first-out)
+    - [Asymptotic Analysis (Big-O Notation)](#asymptotic-analysis-big-o-notation)
+      - [O-notations Example](#o-notations-example)
+      - [Ω-notations Example](#ω-notations-example)
+      - [Θ-notations Example](#θ-notations-example)
+    - [Sorting Algorithms](#sorting-algorithms)
+    - [Insertion Sort](#insertion-sort)
+  - [Lecture 3](#lecture-3)
+    - [Quicksort (Divide and Conquer Sorting Algorithm)](#quicksort-divide-and-conquer-sorting-algorithm)
+    - [Counting Sort (O(n))](#counting-sort-on)
+    - [Radix Sort (O(nk))](#radix-sort-onk)
+    - [Recurrence](#recurrence)
+
 ## Lecture 1
 
 ### Course Overview
 
-Algorithm design techniques (recursion, divide & conquer, greedy, dynamic programming)<br>
-Data structures (arrays, linked lists, stacks, queues)<br>
-Algorithm analysis (correctness, complexity)<br>
+- Algorithm design techniques (recursion, divide & conquer, greedy, dynamic programming)
+- Data structures (arrays, linked lists, stacks, queues)
+- Algorithm analysis (correctness, complexity)
 
 ### Array
 
@@ -277,3 +300,61 @@ Time Complexity:<br>
 - Best Case: O(n) – when the array is already sorted.
 - Average Case: O(n²) – when elements are in random order.
 - Worst Case: O(n²) – when the array is sorted in reverse order.
+
+## Lecture 3
+
+### Quicksort (Divide and Conquer Sorting Algorithm)
+
+```
+def quickSort(arr, start, end):
+    if start < end:
+        pivot = end
+        i = start - 1
+        for j in range(start, end):
+            if arr[j] <= arr[pivot]:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[i + 1], arr[pivot] = arr[pivot], arr[i + 1]
+        p = i + 1
+        quickSort(arr, start, p - 1)
+        quickSort(arr, p + 1, end)
+
+arr = [5, 4, 3, 2, 1]
+quickSort(arr, 0, len(arr) - 1)
+print(arr)  # Output: [1, 2, 3, 4, 5]
+```
+
+Time Complexity:<br>
+
+- Best Case (O(n log n)): Pivot is near the middle.
+- Average Case (O(n log n)): Randomized pivot selection.
+- Worst Case (O(n²)): Pivot is always the smallest/largest (e.g., sorted/reverse sorted arrays).
+
+### Counting Sort (O(n))
+
+Steps:<br>
+- Find the maximum value in the array.
+- Create a count array initialized with zeros.
+- Store occurrences of each element in the count array.
+- Compute cumulative sums to determine final positions.
+- Place elements into the sorted array.
+
+### Radix Sort (O(nk))
+
+Example:<br>
+Sorting [121, 432, 564, 23, 1, 45, 788]:<br>
+Sort by units digit → [1, 121, 432, 23, 564, 45, 788]<br>
+Sort by tens digit → [1, 23, 121, 432, 45, 564, 788]<br>
+Sort by hundreds digit → [1, 23, 45, 121, 432, 564, 788] (Sorted)<br>
+
+### Recurrences and Solving Recurrences
+
+Why Use Recurrences?<br>
+
+- Many algorithms (e.g., Divide and Conquer, Dynamic Programming) use recursion, making it hard to determine their time complexity directly.
+- Recurrences give a general method to analyze running time.
+
+Solving Recurrences: <br>
+- Substitution Method
+- Recursion Tree Method
+- Master Theorem
