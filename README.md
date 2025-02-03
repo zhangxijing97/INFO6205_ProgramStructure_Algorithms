@@ -1,6 +1,86 @@
 # INFO6205_ProgramStructure_Algorithms
 
-# LaTeX Overview
+## Lecture 1
+
+### Course Overview
+
+Algorithm design techniques (recursion, divide & conquer, greedy, dynamic programming)<br>
+Data structures (arrays, linked lists, stacks, queues)<br>
+Algorithm analysis (correctness, complexity)<br>
+
+### Array
+
+NumPy Arrays Example
+```
+import numpy as np
+
+arr1D = np.array([1, 2, 3, 4, 5])
+print(arr1D)
+
+arr2D = np.array([[1, 2, 3], [4, 5, 6]])
+print(arr2D)
+
+# Accessing elements
+print(arr2D[1, -1])  # Last element of the second row
+```
+
+NumPy Slicing and Reshaping
+```
+# Slicing: [start:end:step]
+print(arr1D[1:5:2])  # Every other element from index 1 to 5
+print(arr1D[::2])    # Every other element from entire array
+
+# Reshaping: Convert 1D to 2D
+arr = np.array([1,2,3,4,5,6,7,8,9,10,11,12])
+newarr2D = arr.reshape(4,3)  # Converts into 4 rows & 3 columns
+print(newarr2D)
+```
+
+Advantages of Arrays<br>
+- ✔ Constant time access (O(1)) due to direct indexing
+- ✔ Efficient memory usage (contiguous storage, good cache locality)
+- ✔ Supported in all programming languages (widely used)
+- ✔ Simple and easy to use compared to other data structures
+- ✔ Supports multi-dimensional structures (2D, 3D arrays)
+
+
+Disadvantages of Arrays<br>
+- ✖ Fixed size – cannot grow dynamically like linked lists.
+- ✖ Insertion and deletion are costly (O(n)) due to shifting elements.
+- ✖ Only supports one data type – lacks flexibility.
+
+### Linked List
+
+```
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def print_list(self):
+        temp = self.head
+        while temp:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+        print("NULL")
+
+ll = LinkedList()
+ll.insert(10)
+ll.insert(20)
+ll.insert(30)
+ll.print_list()
+```
+
+### LaTeX Overview
 
 Basic Document Structure
 ```
@@ -60,3 +140,6 @@ Adding Images
 \caption{A sample image}
 \end{figure}
 ```
+
+## Lecture 2
+
