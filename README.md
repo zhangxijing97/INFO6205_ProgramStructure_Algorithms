@@ -366,10 +366,13 @@ It works by guessing a solution and proving it using mathematical induction.<br>
 
 What is `O` for `T(n) = 2T(⌊n/2⌋) + Θ(n)`?<br>
 
-Let `T(n) = O(n log n)`,<br>
+The recurrence: `T(n)=2T(n/2)+O(n)` is very similar to Merge Sort, which we already know has complexity `O(n log n)`.<br>
+So, we suspect that `T(n) = O(n log n)` might be the correct answer.<br>
+
+Guess `T(n) = O(n log n)`,<br>
 We need to prove that `T(n) ≤ c * n log n` for all `n > n₀`.<br>
 
-Inductive Hypothesis:  
+Inductive Hypothesis:
 Assume that `T(n) ≤ c * n log n` holds for `⌊n/2⌋`, meaning:<br>
 `T(⌊n/2⌋) ≤ c ⌊n/2⌋ log ⌊n/2⌋`.<br>
 
@@ -380,6 +383,7 @@ Substituting into the recurrence: <br>
 `= c n log(n/2) + Θ(n)`<br>
 `= c n (log n - log 2) + Θ(n)`<br>
 `= c n log n - c n log 2 + Θ(n)`<br>
+`≤ c n log n`<br>
 
 Since `-c n log 2 + Θ(n)` is a lower-order term,<br>
 we can conclude:<br>
