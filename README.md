@@ -374,7 +374,8 @@ Assume that `T(n) ≤ c * n log n` holds for `⌊n/2⌋`, meaning:<br>
 `T(⌊n/2⌋) ≤ c ⌊n/2⌋ log ⌊n/2⌋`.<br>
 
 Substituting into the recurrence: <br>
-`T(n) ≤ 2T(⌊n/2⌋) + Θ(n) ≤ 2(c ⌊n/2⌋ log ⌊n/2⌋) + Θ(n)`<br>
+`T(n) = 2T(⌊n/2⌋) + Θ(n)`<br>
+`≤ 2(c ⌊n/2⌋ log ⌊n/2⌋) + Θ(n)`<br>
 `≤ 2(c (n/2) log(n/2)) + Θ(n)`<br>
 `= c n log(n/2) + Θ(n)`<br>
 `= c n (log n - log 2) + Θ(n)`<br>
