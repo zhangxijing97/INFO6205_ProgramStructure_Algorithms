@@ -205,3 +205,36 @@ Since `n² + 2n + 1 ≤ n² + 2n² + n²` for all `n > 1`<br>
 We can get `n² + 2n + 1 ≤ 4n²` for all `n > 1`<br>
 Therefore, `n₀ = 1` and `c = 4`<br>
 `f(n)` grows as `O(n²)`<br>
+
+#### Ω-notations Example
+
+What is `Ω` for `f(n) = log(n⁴) + 2ⁿ`?<br>
+
+Let `g(n) = log(n)`,<br>
+We need to find constants `c` and `n₀` such that:<br>
+`f(n) ≥ c * g(n) for all n > n₀`<br>
+which is `log(n⁴) + 2ⁿ ≥ c * log(n)`<br>
+Since `log(n⁴) + 2ⁿ = 4log(n) + 2ⁿ`<br>
+and `4log(n) + 2ⁿ ≥ c * log(n)` for all `n > 1`<br>
+We can choose `c = 1` and `n₀ = 1`<br>
+Therefore, `f(n)` is lower-bounded as `Ω(log(n))`<br>
+
+#### Θ-notations Example
+
+What is `Θ` for `f(n) = n² + 5n log n`?<br>
+
+Let `g(n) = n²`,<br>
+We need to find constants `c₁`, `c₂`, and `n₀` such that:<br>
+`c₁ * g(n) ≤ f(n) ≤ c₂ * g(n) for all n > n₀`<br>
+
+For the **upper bound (Big-O)**:<br>
+Since `5n log n ≤ 5n²` for all `n > 1`, choosing `c₂ = 6` gives:<br>
+`n² + 5n log n ≤ 6n²` for all `n > 1`<br>
+Thus, `f(n)` is **upper-bounded by `O(n²)`**.<br>
+
+For the **lower bound (Big-Omega)**:<br>
+Since `n² + 5n log n ≥ n²` for all `n > 1`, choosing `c₁ = 1` gives:<br>
+`n² + 5n log n ≥ n²` for all `n > 1`<br>
+Thus, `f(n)` is **lower-bounded by `Ω(n²)`**.<br>
+
+Therefore, `n₀ = 1`, and `f(n) ∈ Θ(n²)`.<br>
