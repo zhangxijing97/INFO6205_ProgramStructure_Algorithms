@@ -185,7 +185,7 @@ Queue Applications<br>
 - **Breadth-First Search (BFS)** in graphs
 - **Preorder traversal** in trees (flattening a tree)
 
-### Asymptotic Analysis (Big-O Notation)**
+### Asymptotic Analysis (Big-O Notation)
 - **Measures how an algorithm's running time grows with input size `n`**.
 - Focuses on the **leading term** (ignores constants and lower-order terms).
 - **Three types of asymptotic bounds**:
