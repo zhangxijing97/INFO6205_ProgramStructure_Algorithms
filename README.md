@@ -192,3 +192,16 @@ Queue Applications<br>
   - **Big-O (`O`)** → Upper bound (worst case).
   - **Big-Omega (`Ω`)** → Lower bound (best case).
   - **Big-Theta (`Θ`)** → Tight bound (both upper and lower).
+
+#### O-notations Example
+
+What is `O` for `f(n) = n² + 2n + 1`?<br>
+
+Let `g(n) = n²`,<br>
+We need to find constants `c` and `n₀` such that:<br>
+`f(n) ≤ c * g(n) for all n > n₀`
+which is `n² + 2n + 1 ≤ c * n²`
+Since `n² + 2n + 1 ≤ n² + 2n² + n²` for all `n > 1`
+We can get `n² + 2n + 1 ≤ 4n²` for all `n > 1`
+Therefore, `n₀ = 1` and `c = 4`
+`f(n)` grows as `O(n²)`
