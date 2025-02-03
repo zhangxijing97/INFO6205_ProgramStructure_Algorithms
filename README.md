@@ -358,3 +358,29 @@ Solving Recurrences: <br>
 - Substitution Method
 - Recursion Tree Method
 - Master Theorem
+
+### Substitution Method
+It works by guessing a solution and proving it using mathematical induction.<br>
+
+#### Substitution Method Example
+
+What is `O` for `T(n) = 2T(⌊n/2⌋) + Θ(n)`?<br>
+
+Let `T(n) = O(n log n)`,<br>
+We need to prove that `T(n) ≤ c * n log n` for all `n > n₀`.<br>
+
+Inductive Hypothesis:  
+Assume that `T(n) ≤ c * n log n` holds for `⌊n/2⌋`, meaning:<br>
+`T(⌊n/2⌋) ≤ c ⌊n/2⌋ log ⌊n/2⌋`.<br>
+
+Substituting into the recurrence:  
+`T(n) ≤ 2T(⌊n/2⌋) + Θ(n) ≤ 2(c ⌊n/2⌋ log ⌊n/2⌋) + Θ(n) `
+`≤ 2(c (n/2) log(n/2)) + Θ(n) `
+`= c n log(n/2) + Θ(n) `
+`= c n (log n - log 2) + Θ(n) `
+`= c n log n - c n log 2 + Θ(n)`
+
+Since `-c n log 2 + Θ(n)` is a lower-order term,<br>
+we can conclude:<br>
+
+Therefore, `T(n) = O(n log n)`.
