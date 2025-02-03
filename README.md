@@ -153,3 +153,42 @@ Adding Images
 
 ## Lecture 2
 
+### Stacks (LIFO – Last In, First Out)
+
+| Operation  | Time Complexity |
+|------------|----------------|
+| **Push(item)** – Add element | `O(1)` (without resizing) |
+| **Pop()** – Remove top element | `O(1)` |
+| **Peek()** – Get top element without removing | `O(1)` |
+| **Size()** – Get number of elements | `O(1)` |
+| **IsEmpty()** – Check if stack is empty | `O(1)` |
+
+Stack Applications<br>
+- **Depth-First Search (DFS)** in graphs
+- **Tree Traversals** (Recursion uses an implicit stack)
+- **Undo functionality** in text editors
+- **Reversing a string**
+
+### Queues (FIFO – First In, First Out)
+
+| Operation  | Time Complexity |
+|------------|----------------|
+| **Enqueue(item)** – Add element at end | `O(1)` (without resizing) |
+| **Dequeue()** – Remove front element | `O(1)` |
+| **Peek()** – Get front element without removing | `O(1)` |
+| **Size()** – Get number of elements | `O(1)` |
+| **IsEmpty()** – Check if queue is empty | `O(1)` |
+
+Queue Applications<br>
+- **Task scheduling** in operating systems (OS)
+- **Managing network packets** (TCP/IP, routers)
+- **Breadth-First Search (BFS)** in graphs
+- **Preorder traversal** in trees (flattening a tree)
+
+### Asymptotic Analysis (Big-O Notation)**
+- **Measures how an algorithm's running time grows with input size `n`**.
+- Focuses on the **leading term** (ignores constants and lower-order terms).
+- **Three types of asymptotic bounds**:
+  - **Big-O (`O`)** → Upper bound (worst case).
+  - **Big-Omega (`Ω`)** → Lower bound (best case).
+  - **Big-Theta (`Θ`)** → Tight bound (both upper and lower).
