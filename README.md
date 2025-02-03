@@ -199,9 +199,9 @@ What is `O` for `f(n) = n² + 2n + 1`?<br>
 
 Let `g(n) = n²`,<br>
 We need to find constants `c` and `n₀` such that:<br>
-`f(n) ≤ c * g(n) for all n > n₀`
-which is `n² + 2n + 1 ≤ c * n²`
-Since `n² + 2n + 1 ≤ n² + 2n² + n²` for all `n > 1`
-We can get `n² + 2n + 1 ≤ 4n²` for all `n > 1`
-Therefore, `n₀ = 1` and `c = 4`
-`f(n)` grows as `O(n²)`
+`f(n) ≤ c * g(n) for all n > n₀`<br>
+which is `n² + 2n + 1 ≤ c * n²`<br>
+Since `n² + 2n + 1 ≤ n² + 2n² + n²` for all `n > 1`<br>
+We can get `n² + 2n + 1 ≤ 4n²` for all `n > 1`<br>
+Therefore, `n₀ = 1` and `c = 4`<br>
+`f(n)` grows as `O(n²)`<br>
