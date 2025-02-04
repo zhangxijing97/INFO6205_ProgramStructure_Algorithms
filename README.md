@@ -555,3 +555,48 @@ Since the condition holds, we use **Case 3** of the Master Theorem:<br>
 Final result:<br>
 
 `T(n) = Θ(n³)`<br>
+
+### Divide & Conquer (D-Q)
+
+**Divide & Conquer** is a problem-solving approach that involves breaking a problem into smaller subproblems, solving them recursively, and combining the solutions.
+
+#### Steps:
+1. **Divide**: Split the problem into smaller subproblems.
+2. **Conquer**: Solve each subproblem recursively.
+3. **Combine**: Merge the solutions to solve the original problem.
+
+#### Examples:
+- **Merge Sort**: Recursively divides an array into halves, sorts them, and merges the sorted halves.
+- **QuickSort**: Selects a pivot, partitions the array into smaller and larger elements, and sorts recursively.
+- **Binary Search**: Recursively searches for an element by halving the search space.
+
+### Binary Search (`O(log n)`)
+
+Binary Search is an efficient way to find an element in a **sorted array** by repeatedly halving the search space.
+
+#### Steps:
+1. Find the **middle element** of the array.
+2. If it matches the target, return its index.
+3. If the target is **smaller**, search in the **left half**.
+4. If the target is **greater**, search in the **right half**.
+5. Repeat until the element is found or the search space is empty.
+
+#### Time Complexity:
+- **Best Case**: `O(1)` (if the middle element is the target).
+- **Worst & Average Case**: `O(log n)` (as the search space is halved each step).
+
+#### Example Code:
+```python
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+## Lecture 4
