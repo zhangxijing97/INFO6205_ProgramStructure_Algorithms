@@ -360,6 +360,7 @@ Solving Recurrences: <br>
 - Master Theorem
 
 ### Substitution Method
+
 It works by guessing a solution and proving it using mathematical induction.<br>
 
 #### Substitution Method Example
@@ -389,3 +390,50 @@ Since `-c n log 2 + Θ(n)` is a lower-order term,<br>
 we can conclude:<br>
 
 Therefore, `T(n) = O(n log n)`.<br>
+
+### Recursion trees Method
+
+- Original problem: root with size n.
+- Each non base node has a children with size n/b.
+- By summing across each level, the recursion tree shows the cost at each level of recursion.
+`Total cost = sum of all levels`
+- Can be used to generate a guess. Then verify by substitution method.
+
+#### Recursion trees Method Example
+
+The given recurrence is:
+`T(n) = 3T(n/4) + Θ(n²)`
+This means:
+- The problem of size `n` breaks into 3 smaller subproblems, each of size `n/4`.
+- Each level does some extra work of `Θ(n²)` before calling the next level.
+- This continues until the problem size reaches `1` (base case).
+
+Step 1: Drawing the Recursion Tree<br>
+- Level 0 (Root Node):
+  - We start with the original problem `T(n)`, which does `Θ(n²)` work.
+- Level 1:
+  - The problem splits into 3 subproblems: `T(n/4)`, `T(n/4)`, `T(n/4)`.
+  - Each subproblem does its own work of `Θ((n/4)²)`.
+- Level 2:
+  - Each `T(n/4)` now splits into 3 more subproblems of size `T(n/16)`.
+  - This pattern continues until `n = 1`.
+
+Step 2: Finding the Depth of the Tree<br>
+- Since each subproblem is reduced by a factor of `4`, the number of levels is:
+`log₄(n)`
+- So, the tree has `log₄(n)` levels before reaching the base case `T(1) = Θ(1)`.
+
+Step 3: Counting the Number of Leaves<br>
+- Each level triples the number of nodes (because `T(n) = 3T(n/4) + Θ(n²)`).
+- The total number of leaf nodes at the last level is:
+`3^(log₄(n)) = n^(log₄(3))`
+
+Step 4: Calculating the Total Work<br>
+- At each level, the work done is decreasing:
+`Θ(n²) + Θ((n/4)²) + Θ((n/16)²) + ... + Θ(1)`
+- The total work forms a geometric series, which sums to `O(n²)`.
+
+Final Answer<br>
+- Depth of the tree: `log₄(n)`
+- Number of leaves: `n^(log₄(3))`
+- Total work done: `O(n²)`
