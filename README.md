@@ -609,3 +609,45 @@ def binary_search(arr, target):
 ```
 
 ## Lecture 4
+
+### Divide and Conquer
+
+- Divide the problem into smaller subproblems.
+- Recursively solve the subproblems.
+- Combine the results to get the final solution.
+
+#### Examples
+- Binary Search
+- Merge Sort
+- Problems:
+  - Find Majority Element
+  - Find the Index of First “1” in a Sorted Binary Array
+
+### Binary search
+
+- Find middle element mid = lo + (hi – lo)/2
+- Return𝑖if𝐴𝑚𝑖𝑑 == 𝑥
+- If 𝐴 𝑚𝑖𝑑 < 𝑥, search 𝐴[𝑚𝑖𝑑 + 1: h𝑖] (subproblem)
+- If 𝐴 𝑚𝑖𝑑 > 𝑥, search 𝐴[𝑙𝑜: 𝑚𝑖𝑑 − 1] (subproblem)
+- Return -1 if x cannot be found in subproblem.
+- Initially, lo = 1, hi = n
+
+#### Running Time
+
+- In each iteration, we discard one half of the subproblem.
+- So, the size of each successive subproblem is halved:
+  - Let, `n = 2^k`
+  - Subproblem sizes:  
+    `2^k → 2^(k-1) → 2^(k-2) → ... → 2^(k-k) = 1`
+- In each iteration, we do a constant amount of work:
+  - Either check for equality or inequality of `A[mid]` with `x`.
+
+We can express the running time as:<br>
+`T(n) = T(n/2) + O(1)`
+
+Solving Using Master Theorem<br>
+- Given:
+  - `a = 1`, `b = 2`, `d = 0`, `k = 0`
+  - `log a / log b = d` ⇒ **Case 2** of the Master Theorem
+- Solution:
+  `Θ(n^d log^(k+1) n) = Θ(log n)`
