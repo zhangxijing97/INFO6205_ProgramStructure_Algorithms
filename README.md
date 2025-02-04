@@ -679,9 +679,54 @@ Recurrence Relation:<br>
 `T(n) = 2T(n/2) + θ(n) = cn + n log n = θ(n log n)`
 
 Time Complexity:<br>
-- **Best-case, Average-case, and Worst-case**:  
+- **Best-case, Average-case, and Worst-case**:
   `θ(n log n)`
 
 Space Complexity:<br>
-- `θ(n)` for arrays  
+- `θ(n)` for arrays
 - `O(1)` for linked lists
+
+### Find Majority Element
+
+#### Problem Statement
+- Given an array A[1:n], a majority element is any element that appears more than n/2 times.
+
+#### Observations
+- At most one majority element exists.
+- If A has a majority element, it must be a majority in at least one of its halves.
+
+#### Divide and Conquer Approach
+1. Divide A into two halves: A1 and A2.
+2. Recursively find the majority element in each half.
+3. Merge Step:
+   - If neither A1 nor A2 has a majority, return None.
+   - If only A1 has a majority, count its occurrences in A to verify.
+   - If only A2 has a majority, count its occurrences in A to verify.
+   - If both halves have the same majority, return it.
+
+#### Time Complexity
+- Recurrence relation: T(n) = 2T(n/2) + O(n)
+- Solution: O(n log n)
+
+### Find the Index of First “1” in a Sorted Binary Array
+
+#### Problem Statement
+- Given a sorted binary array A[1:n] where all 0s appear before 1s, find the index of the first 1.
+
+#### Brute-Force Approach
+1. Scan A from 1 to n.
+2. Return the first index where A[i] = 1.
+3. If no 1 exists, return -1.
+
+- Time Complexity: O(n)
+
+#### Optimized Divide and Conquer Approach
+1. Binary Search for the first 1:
+   - Find mid = (lo + hi) / 2.
+   - If A[mid] = 1 and A[mid-1] = 0, return mid.
+   - If A[mid] = 0, search in the right half.
+   - If A[mid] = 1 but A[mid-1] = 1, search in the left half.
+
+#### Time Complexity
+- Recurrence relation: T(n) = T(n/2) + O(1)
+- Solution: O(log n)
