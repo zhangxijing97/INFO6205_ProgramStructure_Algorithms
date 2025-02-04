@@ -447,15 +447,15 @@ Where:<br>
 - `b` is the factor by which the problem size is reduced.
 - `f(n)` is the extra work done at each level outside the recursion.
 
-1. **Case 1** (`f(n)` grows slower than `n^(log_b(a))`):
-`f(n) = O(n^(log_b(a) - ε)), where ε > 0`
-=>  `T(n) = Θ(n^(log_b(a)))`
+1. **Case 1** (`f(n)` grows slower than `n^(log_b(a))`):<br>
+`f(n) = O(n^(log_b(a) - ε)), where ε > 0`<br>
+=>  `T(n) = Θ(n^(log_b(a)))`<br>
 
-2. **Case 2** (`f(n)` grows at the same rate as `n^(log_b(a))`):
-`f(n) = Θ(n^(log_b(a)) log^k(n)), where k ≥ 0`
-=>  `T(n) = Θ(n^(log_b(a)) log^(k+1)(n))`
+2. **Case 2** (`f(n)` grows at the same rate as `n^(log_b(a))`):<br>
+`f(n) = Θ(n^(log_b(a)) log^k(n)), where k ≥ 0`<br>
+=>  `T(n) = Θ(n^(log_b(a)) log^(k+1)(n))`<br>
 
 
-3. **Case 3** (`f(n)` grows faster than `n^(log_b(a))`):
-`f(n) = Ω(n^(log_b(a) + ε)), where ε > 0`
-=>  `T(n) = Θ(f(n))`
+3. **Case 3** (`f(n)` grows faster than `n^(log_b(a))`):<br>
+`f(n) = Ω(n^(log_b(a) + ε)), where ε > 0`<br>
+=>  `T(n) = Θ(f(n))`<br>
