@@ -651,3 +651,37 @@ Solving Using Master Theorem<br>
   - `log a / log b = d` ⇒ **Case 2** of the Master Theorem
 - Solution:
   `Θ(n^d log^(k+1) n) = Θ(log n)`
+
+### Merge sort
+
+Merge sort on Sequence S of N elements:<br>
+➢ Divide: Divide S into disjoint subsets S1 and S2<br>
+➢ Conquer: Recursively merge sort S1 and S2<br>
+➢ Combine: Merge S1 and S2 into a sorted sequence<br>
+
+```
+MERGE-SORT(A, p, r):
+  if p < r:
+      q = (p + r) // 2  # Divide the array into two halves
+      MERGE-SORT(A, p, q)  # Conquer (Sort left half)
+      MERGE-SORT(A, q+1, r)  # Conquer (Sort right half)
+      MERGE(A, p, q, r)  # Combine (Merge both halves)
+```
+
+#### Running Time
+
+- Recursive tree is a **perfect binary tree**, height is `log n`.
+- At each depth `k`, we need to merge `2^(k+1)` sequences of size `n / 2^(k+1)`:
+  - **Work at each depth is** `θ(n)`
+  - **Base case**: `T(1) = c`
+
+Recurrence Relation:<br>
+`T(n) = 2T(n/2) + θ(n) = cn + n log n = θ(n log n)`
+
+Time Complexity:<br>
+- **Best-case, Average-case, and Worst-case**:  
+  `θ(n log n)`
+
+Space Complexity:<br>
+- `θ(n)` for arrays  
+- `O(1)` for linked lists
