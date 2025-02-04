@@ -465,7 +465,7 @@ Where:<br>
 
 `T(n) = 5T(n/2) + Θ(n²)`
 
-Using the **Master Theorem** for recurrences of the form:<br>
+Using the Master Theorem for recurrences of the form:<br>
 
 `T(n) = aT(n/b) + f(n)`
 
@@ -477,6 +477,10 @@ where:
 We calculate:<br>
 
 `log₂(5) ≈ 2.32`, so `n^(log₂(5)) ≈ n^2.32`.<br>
+
+We try case 1 in here, which mean that Θ(n²) <= O(n^(log_b(a) - ε))<br>
+cn² <= c(n^(log_b(a) - ε))<br>
+n² <= n^(log_b(a) - ε)<br>
 
 Comparing `f(n) = Θ(n²)` with `n^(log₂(5)) = Θ(n^2.32)`, we see that `n²` grows slower than `n^2.32`, meaning `log₂(5 - ϵ) >= 2` for `ϵ <= 1`.<br>
 
