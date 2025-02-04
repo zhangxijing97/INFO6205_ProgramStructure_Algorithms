@@ -462,7 +462,6 @@ Where:<br>
 
 #### Master method Example Case 1
 
-
 `T(n) = 5T(n/2) + Θ(n²)`
 
 Using the Master Theorem for recurrences of the form:<br>
@@ -478,10 +477,10 @@ We calculate:<br>
 
 `log₂(5) ≈ 2.32`, so `n^(log₂(5)) ≈ n^2.32`.<br>
 
-We try case 1 in here, which mean that Θ(n²) <= O(n^(log_b(a) - ε))<br>
-For some constant c > 0:<br>
-cn² <= c(n^(log_b(a) - ε))<br>
-So we need to find n² <= n^(log_b(a) - ε) where ε > 0<br>
+We try case 1 in here, which mean that `Θ(n²) <= O(n^(log_b(a) - ε))`<br>
+For some constant `c > 0`:<br>
+`cn² <= c(n^(log_b(a) - ε))`<br>
+So we need to find `n² <= n^(log_b(a) - ε)` where `ε > 0`<br>
 
 Comparing `f(n) = Θ(n²)` with `n^(log₂(5)) = Θ(n^2.32)`, we see that `n²` grows slower than `n^2.32`, meaning `log₂(5 - ϵ) >= 2` for `ϵ <= 1`.<br>
 
@@ -492,3 +491,34 @@ Since `f(n) = O(n^(log_b(a) - ϵ))`, we use Case 1 of the Master Theorem:<br>
 Final result:<br>
 
 `T(n) = Θ(n^(lg 5))`<br>
+
+#### Master method Example Case 2
+
+`T(n) = 27T(n/3) + Θ(n³ log n)`
+
+Using the Master Theorem for recurrences of the form:<br>
+
+`T(n) = aT(n/b) + f(n)`
+
+where:
+- `a = 27` (27 subproblems)
+- `b = 3` (each subproblem size is `n/3`)
+- `f(n) = Θ(n³ log n)`
+
+We calculate:<br>
+
+`log₃(27) = 3`, so `n^(log₃(27)) = n³`.<br>
+
+We try case 2 here, which means that `f(n) = Θ(n^(log_b(a)) log^k n)`<br>
+For some constant `c > 0`:<br>
+`cn³ log n = c(n^(log_b(a)) log^k n)`<br>
+
+Comparing `f(n) = Θ(n³ log n)` with `n^(log₃(27)) = Θ(n³)`, we see that `f(n)` has an extra `log n` factor, meaning `k = 1`.<br>
+
+Since `f(n) = Θ(n^(log_b(a)) log^k n)`, we use Case 2 of the Master Theorem:<br>
+
+`T(n) = Θ(n^(log_b(a)) log^(k+1) n)`<br>
+
+Final result:<br>
+
+`T(n) = Θ(n³ log² n)`<br>
