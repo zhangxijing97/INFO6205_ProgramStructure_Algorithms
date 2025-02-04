@@ -598,5 +598,6 @@ def binary_search(arr, target):
         else:
             right = mid - 1
     return -1
+```
 
 ## Lecture 4
