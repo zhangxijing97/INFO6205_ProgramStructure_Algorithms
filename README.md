@@ -22,6 +22,14 @@
     - [Counting Sort (O(n))](#counting-sort-on)
     - [Radix Sort (O(nk))](#radix-sort-onk)
     - [Recurrence](#recurrence)
+    - [Substitution Method](#substitution-method)
+    - [Recursion Trees Method](#recursion-trees-method)
+    - [Master Method](#master-method)
+      - [Master Method Example Case 1](#master-method-example-case-1)
+      - [Master Method Example Case 2](#master-method-example-case-2)
+      - [Master Method Example Case 3](#master-method-example-case-3)
+    - [Divide & Conquer (D-Q)](#divide--conquer-d-q)
+    - [Binary Search (O(log n))](#binary-search-olog-n)
 
 ## Lecture 1
 
