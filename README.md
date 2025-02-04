@@ -730,3 +730,78 @@ Space Complexity:<br>
 #### Time Complexity
 - Recurrence relation: T(n) = T(n/2) + O(1)
 - Solution: O(log n)
+
+## Lecture 5
+
+### Graph Definition
+
+A graph G = (V,E) consists of two things:<br>
+- A collection V of vertices, or objects to be connected.
+- A collection E of edges, each of which connects a pair of vertices.
+
+### Graph Representations
+
+#### 1. Adjacency Matrix (Good for dense graphs but uses more space)
+- Uses a table (matrix) to show connections between nodes.
+- If two nodes are connected, we put 1, otherwise 0.
+- Good for dense graphs (many connections).
+
+#### Example
+For this graph
+```
+ A --- B
+ |   / |
+ |  /  |
+ C --- D
+```
+The Adjacency Matrix looks like this:
+
+|   | A | B | C | D |
+|---|---|---|---|---|
+| A | 0 | 1 | 1 | 0 |
+| B | 1 | 0 | 1 | 1 |
+| C | 1 | 1 | 0 | 1 |
+| D | 0 | 1 | 1 | 0 |
+
+#### Pros & Cons
+✅ Fast to check if two nodes are connected  
+✅ Works well for graphs with many connections  
+❌ Uses a lot of space (even for missing connections)  
+❌ Finding neighbors is slow (need to check an entire row)  
+
+##### 2. Adjacency List (Best for most cases)
+- Each node keeps a list of neighbors.
+- Uses less space than a matrix.
+- Fast to find neighbors of a node.
+
+#### Example
+For the same graph, the Adjacency List is:
+
+`A → [B, C] B → [A, C, D] C → [A, B, D] D → [B, C]`
+
+#### Pros & Cons
+✅ Uses less space (only stores connections)  
+✅ Fast to find neighbors  
+❌ Checking if two nodes are connected takes longer  
+
+---
+
+### 3. Edge List (Simple, but hard to find neighbors)
+- Just a list of all connections (edges).
+- Doesn't store nodes directly, just who connects to whom.
+
+#### Example
+
+`(A, B) (A, C) (B, C) (B, D) (C, D)`
+
+#### Pros & Cons
+✅ Takes very little space  
+✅ Good for algorithms that process edges  
+❌ Finding neighbors is slow (need to search the whole list)  
+
+### Which One Should You Use?
+| Graph Type       | Best Representation |
+|-----------------|--------------------|
+| Many connections (Dense Graph) | Adjacency Matrix |
+| Most cases (Normal Graph) | Adjacency List |
+| Only care about edges | Edge List |
