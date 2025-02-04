@@ -479,8 +479,9 @@ We calculate:<br>
 `log₂(5) ≈ 2.32`, so `n^(log₂(5)) ≈ n^2.32`.<br>
 
 We try case 1 in here, which mean that Θ(n²) <= O(n^(log_b(a) - ε))<br>
+For some constant c > 0:<br>
 cn² <= c(n^(log_b(a) - ε))<br>
-n² <= n^(log_b(a) - ε)<br>
+So we need to find n² <= n^(log_b(a) - ε) where ε > 0<br>
 
 Comparing `f(n) = Θ(n²)` with `n^(log₂(5)) = Θ(n^2.32)`, we see that `n²` grows slower than `n^2.32`, meaning `log₂(5 - ϵ) >= 2` for `ϵ <= 1`.<br>
 
