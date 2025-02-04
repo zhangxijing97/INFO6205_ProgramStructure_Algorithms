@@ -522,3 +522,36 @@ Since `f(n) = Θ(n^(log_b(a)) log^k n)`, we use Case 2 of the Master Theorem:<br
 Final result:<br>
 
 `T(n) = Θ(n³ log² n)`<br>
+
+#### Master method Example Case 3
+
+`T(n) = 5T(n/2) + Θ(n³)`
+
+Using the Master Theorem for recurrences of the form:<br>
+
+`T(n) = aT(n/b) + f(n)`
+
+where:
+- `a = 5` (5 subproblems)
+- `b = 2` (each subproblem size is `n/2`)
+- `f(n) = Θ(n³)`
+
+We calculate:<br>
+
+`log₂(5) ≈ 2.32`, so `n^(log₂(5)) ≈ n^2.32`.<br>
+
+We try case 3 here, which means that `f(n) = Ω(n^(log_b(a) + ε))` for some `ε > 0`.<br>
+For some constant `c > 0`:<br>
+`n³ ≥ c n^(log_b(a) + ε)`<br>
+
+Since `log₂(5) + ε = 3` for some `ε > 0`, we check the **regularity condition**:<br>
+
+`a f(n/b) = 5(n/2)³ = 5n³/8 ≤ c n³` for `c = 5/8 < 1`.<br>
+
+Since the condition holds, we use **Case 3** of the Master Theorem:<br>
+
+`T(n) = Θ(f(n))`<br>
+
+Final result:<br>
+
+`T(n) = Θ(n³)`<br>
