@@ -459,3 +459,31 @@ Where:<br>
 3. **Case 3** (`f(n)` grows faster than `n^(log_b(a))`):<br>
 `f(n) = Ω(n^(log_b(a) + ε)), where ε > 0`<br>
 =>  `T(n) = Θ(f(n))`<br>
+
+#### Master method Example Case 1
+
+
+`T(n) = 5T(n/2) + Θ(n²)`
+
+Using the **Master Theorem** for recurrences of the form:<br>
+
+`T(n) = aT(n/b) + f(n)`
+
+where:
+- `a = 5` (5 subproblems)
+- `b = 2` (each subproblem size is `n/2`)
+- `f(n) = Θ(n²)`
+
+We calculate:<br>
+
+`log₂(5) ≈ 2.32`, so `n^(log₂(5)) ≈ n^2.32`.<br>
+
+Comparing `f(n) = Θ(n²)` with `n^(log₂(5)) = Θ(n^2.32)`, we see that `n²` grows slower than `n^2.32`, meaning `log₂(5 - ϵ) >= 2` for `ϵ <= 1`.<br>
+
+Since `f(n) = O(n^(log_b(a) - ϵ))`, we use Case 1 of the Master Theorem:<br>
+
+`T(n) = Θ(n^(log_b(a)))`<br>
+
+Final result:<br>
+
+`T(n) = Θ(n^(lg 5))`<br>
