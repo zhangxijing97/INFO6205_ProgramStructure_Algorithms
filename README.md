@@ -769,7 +769,7 @@ The Adjacency Matrix looks like this:
 ❌ Uses a lot of space (even for missing connections)  
 ❌ Finding neighbors is slow (need to check an entire row)  
 
-##### 2. Adjacency List (Best for most cases)
+#### 2. Adjacency List (Best for most cases)
 - Each node keeps a list of neighbors.
 - Uses less space than a matrix.
 - Fast to find neighbors of a node.
@@ -786,7 +786,7 @@ For the same graph, the Adjacency List is:
 
 ---
 
-### 3. Edge List (Simple, but hard to find neighbors)
+#### 3. Edge List (Simple, but hard to find neighbors)
 - Just a list of all connections (edges).
 - Doesn't store nodes directly, just who connects to whom.
 
@@ -799,9 +799,50 @@ For the same graph, the Adjacency List is:
 ✅ Good for algorithms that process edges  
 ❌ Finding neighbors is slow (need to search the whole list)  
 
-### Which One Should You Use?
+#### Which One Should You Use?
 | Graph Type       | Best Representation |
 |-----------------|--------------------|
 | Many connections (Dense Graph) | Adjacency Matrix |
 | Most cases (Normal Graph) | Adjacency List |
 | Only care about edges | Edge List |
+
+#### Explore
+
+```
+explore(v)
+  v.visited ← true
+  For each edge (v,w)
+    If not w.visited 
+      explore(w) 
+      w.prev ← v
+```
+
+```
+def explore(v, graph, visited, parent):
+    """Recursive function to explore a graph using Depth-First Search (DFS)."""
+    visited[v] = True  # Mark the node as visited
+    
+    for w in graph[v]:  # Iterate over all neighbors of v
+        if not visited[w]:  # If neighbor w is not visited
+            parent[w] = v  # Set v as the parent of w
+            explore(w, graph, visited, parent)  # Recursively explore w
+
+# Initialize visited dictionary and parent tracking
+visited = {node: False for node in graph}
+parent = {node: None for node in graph}
+
+# Graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'C', 'D'],
+    'C': ['A', 'B', 'D'],
+    'D': ['B', 'C']
+}
+
+# Start DFS from node 'A'
+explore('A', graph, visited, parent)
+
+# Print the parent mapping
+print("Parent Tracking:", parent)
+```
+
