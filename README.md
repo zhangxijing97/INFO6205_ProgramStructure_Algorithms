@@ -798,8 +798,6 @@ For the same graph, the Adjacency List is:
 ✅ Fast to find neighbors  
 ❌ Checking if two nodes are connected takes longer  
 
----
-
 #### 3. Edge List (Simple, but hard to find neighbors)
 - Just a list of all connections (edges).
 - Doesn't store nodes directly, just who connects to whom.
