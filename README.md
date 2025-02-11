@@ -39,9 +39,9 @@
   - [Lecture 5](#lecture-5)
     - [Graph Definition](#graph-definition)
     - [Graph Representations](#graph-representations)
-      - [Adjacency Matrix](#adjacency-matrix)
-      - [Adjacency List](#adjacency-list)
-      - [Edge List](#edge-list)
+      - [1. Adjacency Matrix (Good for dense graphs but uses more space)](#1-adjacency-matrix-good-for-dense-graphs-but-uses-more-space)
+      - [2. Adjacency List (Best for most cases)](#2-adjacency-list-best-for-most-cases)
+      - [3. Edge List (Simple, but hard to find neighbors)](#3-edge-list-simple-but-hard-to-find-neighbors)
     - [Graph Exploration](#graph-exploration)
       - [Explore Function](#explore-function)
 
