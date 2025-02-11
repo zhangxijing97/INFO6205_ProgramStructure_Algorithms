@@ -30,6 +30,20 @@
       - [Master Method Example Case 3](#master-method-example-case-3)
     - [Divide & Conquer (D-Q)](#divide--conquer-d-q)
     - [Binary Search (O(log n))](#binary-search-olog-n)
+  - [Lecture 4](#lecture-4)
+    - [Divide and Conquer](#divide-and-conquer)
+    - [Binary Search](#binary-search)
+    - [Merge Sort](#merge-sort)
+    - [Find Majority Element](#find-majority-element)
+    - [Find the Index of First “1” in a Sorted Binary Array](#find-the-index-of-first-1-in-a-sorted-binary-array)
+  - [Lecture 5](#lecture-5)
+    - [Graph Definition](#graph-definition)
+    - [Graph Representations](#graph-representations)
+      - [Adjacency Matrix](#adjacency-matrix)
+      - [Adjacency List](#adjacency-list)
+      - [Edge List](#edge-list)
+    - [Graph Exploration](#graph-exploration)
+      - [Explore Function](#explore-function)
 
 ## Lecture 1
 
