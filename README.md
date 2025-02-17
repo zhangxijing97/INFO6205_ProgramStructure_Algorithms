@@ -964,10 +964,14 @@ graph.DFS()
 
 #### Runtime of DFS
 O(V + E) (Linear time)<br>
-V (Vertices): The nodes in the graph.<br>
-E (Edges): The connections (or links) between the nodes.<br>
+- V (Vertices): The nodes in the graph.
+- E (Edges): The connections (or links) between the nodes.
 
-Each vertex is visited once, which takes O(V) time.<br>
-Each edge is explored once, which takes O(E) time.<br>
+- Each vertex is visited once, which takes O(V) time.<br>
+- Each edge is explored once, which takes O(E) time.<br>
 So, the total time complexity is:<br>
-O(V) + O(E) = O(V + E)<br>
+`O(V) + O(E) = O(V + E)`<br>
+
+General Case for Any Graph:<br>
+- If the graph is sparse (few edges), E ≈ V → O(V + V) = O(V).
+- If the graph is dense (many edges), E ≈ V² → O(V + V²) = O(V²).
