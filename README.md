@@ -752,6 +752,7 @@ Space Complexity:<br>
 A graph G = (V,E) consists of two things:<br>
 - A collection V of vertices, or objects to be connected.
 - A collection E of edges, each of which connects a pair of vertices.
+- Degree: vertex v is the number of edges that are incident to it.
 
 ### Graph Representations
 
@@ -788,7 +789,7 @@ The Adjacency Matrix looks like this:
 - Uses less space than a matrix.
 - Fast to find neighbors of a node.
 
-#### Example
+#### Examples
 For the same graph, the Adjacency List is:
 
 `A → [B, C] B → [A, C, D] C → [A, B, D] D → [B, C]`
@@ -818,7 +819,7 @@ For the same graph, the Adjacency List is:
 | Most cases (Normal Graph) | Adjacency List |
 | Only care about edges | Edge List |
 
-#### Explore
+### Explore
 
 ```
 explore(v)
@@ -830,31 +831,116 @@ explore(v)
 ```
 
 ```
-def explore(v, graph, visited, parent):
-    """Recursive function to explore a graph using Depth-First Search (DFS)."""
-    visited[v] = True  # Mark the node as visited
-    
-    for w in graph[v]:  # Iterate over all neighbors of v
-        if not visited[w]:  # If neighbor w is not visited
-            parent[w] = v  # Set v as the parent of w
-            explore(w, graph, visited, parent)  # Recursively explore w
+class Graph:
+    def __init__(self):
+        self.adj_list = {}  # Dictionary to store adjacency list
+        self.visited = {}   # Dictionary to track visited nodes
 
-# Initialize visited dictionary and parent tracking
-visited = {node: False for node in graph}
-parent = {node: None for node in graph}
+    def add_edge(self, v, w):
+        """ Adds an edge to the graph (Undirected by default) """
+        if v not in self.adj_list:
+            self.adj_list[v] = []
+        if w not in self.adj_list:
+            self.adj_list[w] = []
+        self.adj_list[v].append(w)
+        self.adj_list[w].append(v)  # Remove this line for a directed graph
 
-# Graph represented as an adjacency list
-graph = {
-    'A': ['B', 'C'],
-    'B': ['A', 'C', 'D'],
-    'C': ['A', 'B', 'D'],
-    'D': ['B', 'C']
-}
+    def explore(self, v):
+        """ Recursive DFS function to explore a vertex """
+        self.visited[v] = True
+        print(v, end=" ")  # Process node (for example, print it)
 
-# Start DFS from node 'A'
-explore('A', graph, visited, parent)
+        for neighbor in self.adj_list[v]:  # Check all adjacent vertices
+            if not self.visited[neighbor]:  # If not visited, explore it
+                self.explore(neighbor)
 
-# Print the parent mapping
-print("Parent Tracking:", parent)
+
+# 1. Create a Graph
+graph = Graph()
+
+# 2. Add Edges (Example Graph)
+edges = [
+    ("A", "B"), ("A", "C"), 
+    ("B", "C"), ("B", "D"),
+    ("C", "D")
+]
+
+for v, w in edges:
+    graph.add_edge(v, w)
+
+# 3. Initialize visited dictionary
+graph.visited = {vertex: False for vertex in graph.adj_list}
+
+# 4. Run DFS starting from a node (e.g., "A")
+print("DFS traversal starting from A:")
+graph.explore("A")
+
+# DFS traversal starting from A:
+# A B C D 
 ```
 
+### Depth-First Search
+
+```
+DFS(G):
+    for each vertex v in G:
+        if v is not visited:
+            explore(v)
+```
+
+```
+class Graph:
+    def __init__(self):
+        self.adj_list = {}  # Dictionary to store adjacency list
+        self.visited = {}   # Dictionary to track visited nodes
+
+    def add_edge(self, v, w):
+        """ Adds an edge to the graph (Undirected by default) """
+        if v not in self.adj_list:
+            self.adj_list[v] = []
+        if w not in self.adj_list:
+            self.adj_list[w] = []
+        self.adj_list[v].append(w)
+        self.adj_list[w].append(v)  # Remove this line for a directed graph
+
+    def explore(self, v):
+        """ Recursive DFS function to explore a vertex """
+        self.visited[v] = True
+        print(v, end=" ")  # Process node (for example, print it)
+
+        for neighbor in self.adj_list[v]:  # Check all adjacent vertices
+            if not self.visited[neighbor]:  # If not visited, explore it
+                self.explore(neighbor)
+
+    def DFS(self):
+        """ Runs DFS on all unvisited vertices """
+        for vertex in self.adj_list.keys():
+            if not self.visited[vertex]:  # Start DFS from unvisited nodes
+                print(f"\nStarting new DFS component from: {vertex}")
+                self.explore(vertex)
+
+
+# Example Graph (Adjacency List Representation)
+graph = Graph()
+
+edges = [
+    ("A", "B"), ("A", "C"), 
+    ("B", "C"), ("B", "D"),
+    ("C", "D"), ("F", "Z")
+]
+
+# Add edges to the graph
+for v, w in edges:
+    graph.add_edge(v, w)
+
+# Initialize visited dictionary
+graph.visited = {vertex: False for vertex in graph.adj_list}
+
+# Run DFS
+graph.DFS()
+
+# Starting new DFS component from: A
+# A B C D 
+# Starting new DFS component from: F
+# F Z 
+```
