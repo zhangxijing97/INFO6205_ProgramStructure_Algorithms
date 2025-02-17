@@ -975,3 +975,52 @@ So, the total time complexity is:<br>
 General Case for Any Graph:<br>
 - If the graph is sparse (few edges), E ≈ V → O(V + V) = O(V).
 - If the graph is dense (many edges), E ≈ V² → O(V + V²) = O(V²).
+
+### Connected Components
+
+- A connected component is a set of vertices where every pair is reachable.
+
+Algorithm:
+- Run explore(v) from each unvisited vertex.
+- Assign a component number.
+
+Pseudocode
+```
+def ConnectedComponents(G):
+    CCNum = 0  # Counter for component number
+
+    for v in G:  # Iterate through all vertices
+        if not visited[v]:  # If not visited, start a new component
+            CCNum += 1
+            explore(v, CCNum)  # Run DFS and mark component
+
+def explore(v, CCNum):
+    visited[v] = True
+    component[v] = CCNum  # Assign component number
+    for neighbor in adj_list[v]:  
+        if not visited[neighbor]:  
+            explore(neighbor, CCNum)
+```
+
+### Pre- and Post- Orders in DFS
+
+- Preorder: When a vertex is first discovered.
+- Postorder: When the vertex’s exploration finishes.
+
+```
+    A
+   / \
+  B   C
+ / \   \
+D   E   F
+```
+| Vertex | Preorder (`pre[v]`) | Postorder (`post[v]`) |
+|--------|---------------------|----------------------|
+| A      | 1                   | 10                  |
+| B      | 2                   | 5                   |
+| D      | 3                   | 4                   |
+| E      | 6                   | 7                   |
+| C      | 8                   | 9                   |
+| F      | 11                  | 12                  |
+
+### Directed Graphs and Directed Acyclic Graph
