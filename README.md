@@ -754,6 +754,14 @@ A graph G = (V,E) consists of two things:<br>
 - A collection E of edges, each of which connects a pair of vertices.
 - Degree: vertex v is the number of edges that are incident to it.
 
+Graphs can be:<br>
+- Undirected: Edges have no direction.
+- Directed (Digraphs): Edges have a direction (from one vertex to another).
+
+Examples:<br>
+- The Internet as a graph: V= {websites}, E= {links between websites}.
+- A Highway system: V= {intersections}, E= {roads}.
+
 ### Graph Representations
 
 #### 1. Adjacency Matrix (Good for dense graphs but uses more space)
@@ -821,6 +829,7 @@ For the same graph, the Adjacency List is:
 
 ### Explore
 
+Pseudocode for Explore
 ```
 explore(v)
   v.visited ← true
@@ -830,6 +839,7 @@ explore(v)
       w.prev ← v
 ```
 
+Python Code
 ```
 class Graph:
     def __init__(self):
@@ -853,7 +863,6 @@ class Graph:
         for neighbor in self.adj_list[v]:  # Check all adjacent vertices
             if not self.visited[neighbor]:  # If not visited, explore it
                 self.explore(neighbor)
-
 
 # 1. Create a Graph
 graph = Graph()
@@ -881,6 +890,14 @@ graph.explore("A")
 
 ### Depth-First Search
 
+DFS explores as far as possible before backtracking.<br>
+
+Used for:<br>
+- Finding connected components.
+- Topological sorting in DAGs.
+- Cycle detection.
+
+Pseudocode for DFS
 ```
 DFS(G):
     for each vertex v in G:
@@ -888,6 +905,7 @@ DFS(G):
             explore(v)
 ```
 
+Python Code
 ```
 class Graph:
     def __init__(self):
@@ -919,7 +937,6 @@ class Graph:
                 print(f"\nStarting new DFS component from: {vertex}")
                 self.explore(vertex)
 
-
 # Example Graph (Adjacency List Representation)
 graph = Graph()
 
@@ -944,3 +961,13 @@ graph.DFS()
 # Starting new DFS component from: F
 # F Z 
 ```
+
+#### Runtime of DFS
+O(V + E) (Linear time)<br>
+V (Vertices): The nodes in the graph.<br>
+E (Edges): The connections (or links) between the nodes.<br>
+
+Each vertex is visited once, which takes O(V) time.<br>
+Each edge is explored once, which takes O(E) time.<br>
+So, the total time complexity is:<br>
+O(V) + O(E) = O(V + E)<br>
