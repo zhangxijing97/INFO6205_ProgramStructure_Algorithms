@@ -1268,3 +1268,22 @@ BFS(G, s)
 - O(V) operations for initializing distances.
 - Each edge is processed once, leading to O(E) operations.
 - Total time complexity: O(V+E) (Linear time).
+
+### Tree Data Structures
+
+```
+        A
+       / \
+      B   C
+     / \   \
+    D   E   F
+```
+- Root: A
+- Leaves: D, E, F
+- Internal Nodes: A, B, C
+- Siblings: (D, E), (B, C)
+- Height: 2 (A → B → D)
+- Depth of F: 3 (A → C → F)
+
+### Binary Trees & Traversals
+
