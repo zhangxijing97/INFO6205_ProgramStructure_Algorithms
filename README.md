@@ -1170,17 +1170,20 @@ A → D → B → C
 
 - Definition: In a directed graph, two vertices are in the same SCC if they are mutually reachable.
 - Partitioning: The graph is divided into SCCs.
+
+### Metagraph
+
 - Metagraph: A condensed representation where each SCC is a node, forming a Directed Acyclic Graph (DAG).
+- A metagraph is at least two SCCs.
 
+#### Theorem: The metagraph of any directed graph is always a DAG.<br>
 
-#### Theorem: The metagraph of any directed graph is always a DAG.
-
-Proof Sketch:
+Proof Sketch:<br>
 - Assume the metagraph is not a DAG (i.e., it contains a cycle).
 - If there is a cycle in the metagraph, then the SCCs forming that cycle should actually be a single SCC, contradicting the definition of SCCs.
 - Hence, the metagraph must be a DAG.
 
-#### Algorithm to Compute SCCs
+### Algorithm to Compute SCCs
 
 Pseudocode for SCCs Algorithm
 ```
@@ -1194,7 +1197,7 @@ SCCs(G):
 - Runtime: O(|V| + |E|) (since DFS runs twice)
 - G^R: Reverse Graph G
 
-Example<br>
+#### Example<br>
 ```
    A → B → C
    ↑   ↓   ↓
