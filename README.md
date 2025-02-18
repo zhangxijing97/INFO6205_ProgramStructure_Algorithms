@@ -1222,3 +1222,49 @@ Step 3: Run DFS on G in reverse postorder
 (C) is another SCC.
 (F) is another SCC.
 ```
+
+### Breadth-First Search (BFS)
+
+- BFS processes nodes in layers, expanding outward from the starting node.
+- Uses a queue (FIFO) to explore nodes in order of increasing distance.
+
+#### BFS Algorithm
+
+### BFS Algorithm
+
+#### **Initialize Distance Table**
+- Set `dist(v) = ∞` for all nodes.
+- Set `dist(s) = 0` for the source node `s`.
+
+#### **Initialize Queue**
+- Enqueue `s`.
+
+#### **Processing Loop**
+1. Dequeue a node `u`.
+2. For each neighbor `v` of `u`:
+   - If `v` has not been visited (i.e., `dist(v) = ∞`):
+     - Set `dist(v) = dist(u) + 1`.
+     - Enqueue `v`.
+     - Track `v.prev = u` for path reconstruction.
+
+Pseudocode for BFS
+```
+BFS(G, s)
+  For v ∈ V, dist(v) ← ∞
+  Initialize Queue Q
+  Q.enqueue(s)
+  dist(s) ← 0
+
+  While(Q nonempty)
+    u ← Q.dequeue()
+    For (u, v) ∈ E
+      If dist(v) = ∞
+        dist(v) ← dist(u) + 1
+        Q.enqueue(v)
+        v.prev ← u
+```
+
+#### Time Complexity
+- O(V) operations for initializing distances.
+- Each edge is processed once, leading to O(E) operations.
+- Total time complexity: O(V+E) (Linear time).
