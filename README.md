@@ -1101,6 +1101,7 @@ Underwear → Pants → Belt
 
 Topological Ordering Algorithm is to arrange tasks in the correct sequence when they have dependencies.<br>
 
+Pseudocode
 ```
 TopologicalSort(G)
   Run DFS(G) with pre/post numbers
@@ -1161,4 +1162,60 @@ D    |  6   |  7
 Reverse Post Order → Topological Order
 ```
 A → D → B → C
+```
+
+## Lecture 6
+
+### Strongly Connected Components
+
+- Definition: In a directed graph, two vertices are in the same SCC if they are mutually reachable.
+- Partitioning: The graph is divided into SCCs.
+- Metagraph: A condensed representation where each SCC is a node, forming a Directed Acyclic Graph (DAG).
+
+
+#### Theorem: The metagraph of any directed graph is always a DAG.
+
+Proof Sketch:
+- Assume the metagraph is not a DAG (i.e., it contains a cycle).
+- If there is a cycle in the metagraph, then the SCCs forming that cycle should actually be a single SCC, contradicting the definition of SCCs.
+- Hence, the metagraph must be a DAG.
+
+#### Algorithm to Compute SCCs
+
+Pseudocode for SCCs Algorithm
+```
+SCCs(G):
+  Run DFS(G^R) and record postorder numbers.
+  Mark all vertices as unvisited.
+  For each vertex v in reverse postorder:
+    If v is unvisited:
+      Explore(v) and mark it as part of a new SCC.
+```
+- Runtime: O(|V| + |E|) (since DFS runs twice)
+- G^R: Reverse Graph G
+
+Example<br>
+```
+   A → B → C
+   ↑   ↓   ↓
+   E ← D → F
+```
+Step 1: Reverse Graph<br>
+```
+   A ← B ← C
+   ↓   ↑   ↑
+   E → D ← F
+```
+
+Step 2: Run DFS on G^R, record postorder<br>
+- Assume DFS visits nodes in this order: A, E, B, D, C, F.
+- Postorder: F (1), C (2), D (3), B (4), E (5), A (6).
+
+Step 3: Run DFS on G in reverse postorder
+- Process nodes in order: A → E → B → D → C → F.
+- Identify SCCs:
+```
+(A, E, B, D) is one SCC (mutually reachable).
+(C) is another SCC.
+(F) is another SCC.
 ```
