@@ -1030,16 +1030,13 @@ D   E   F
 - Forward Edge: Leads to a descendant in the DFS tree.
 - Cross Edge: Connects unrelated DFS trees.
 
-u and v represent two connected vertices where DFS explores an edge edge u→v<br>
+#### Understanding `u` and `v` in DFS Edge Classification
 
-[    [     ]    ]               Tree/Forward
-u    v     v    u
+- `u` and `v` represent **two connected vertices** in a directed graph.
+- DFS explores the directed edge `u → v`.
+- The classification depends on **preorder and postorder** traversal times.
 
-[    [     ]    ]               Back
-v    u     u    v
-
-[     ]   [     ]               Cross
-v     v   u     u
+#### Edge Classification Table
 
 | Pre/Post Order Representation | Edge Type |
 |------------------------------|------------|
@@ -1071,3 +1068,97 @@ D   E   F
 
 A node u is an ancestor of v if:<br>
 `pre(u) < pre(v) < post(v) < post(u)`
+
+### Directed Acyclic Graphs (DAGs)
+Definition: A Directed Acyclic Graph (DAG) is a directed graph which contains no cycles.<br>
+- A cycle in a graph is when you can start at a node, follow a sequence of edges, and come back to the same node without repeating any edge.
+
+Facts:<br>
+- Let G be a (finite) DAG. Then G has a topological ordering.
+- Every finite DAG contains at least one sink.
+- Finite DAG = A DAG with a limited number of nodes.
+
+Sources and Sinks:<br>
+- A source is a node with no incoming edges (indegree = 0).
+- A sink is a node with no outgoing edges (outdegree = 0).
+- Every finite DAG has at least one source and at least one sink.
+
+#### Topological Ordering and DAGs
+
+- You must put on socks before shoes.
+- You must cook food before eating it.
+- You must study before taking an exam.
+
+So if your graph represents getting dressed, a possible topological order could be:<br>
+
+```
+Socks → Shoes
+Shirt → Jacket
+Underwear → Pants → Belt
+```
+
+#### Topological Ordering Algorithm
+
+Topological Ordering Algorithm is to arrange tasks in the correct sequence when they have dependencies.<br>
+
+```
+TopologicalSort(G)
+  Run DFS(G) with pre/post numbers
+  Return the vertices in reverse postorder
+```
+
+Step-by-Step Example
+```
+    A → B → C
+    A → D
+    D → C
+```
+
+Assigning Pre/Post Numbers
+```
+Step 2: DFS Traversal and Assigning Pre/Post Numbers
+Let’s assume we start DFS from A:
+
+1️⃣ Start DFS from A
+
+Pre(A) = 1
+Go to B
+2️⃣ Move to B
+
+Pre(B) = 2
+Go to C
+3️⃣ Move to C
+
+Pre(C) = 3
+C has no neighbors left
+Post(C) = 4 (DFS is done with C, mark its post number)
+Return to B
+4️⃣ Finish B
+
+Post(B) = 5 (DFS is done with B)
+Return to A
+5️⃣ Move to D
+
+Pre(D) = 6
+D has an edge to C, but C is already visited
+Post(D) = 7
+Return to A
+6️⃣ Finish A
+
+Post(A) = 8
+```
+
+Assign Final Post Numbers
+```
+Node | Pre  | Post
+-----|------|-----
+A    |  1   |  8  
+B    |  2   |  5  
+C    |  3   |  4  
+D    |  6   |  7  
+```
+
+Reverse Post Order → Topological Order
+```
+A → D → B → C
+```
