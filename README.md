@@ -1023,4 +1023,51 @@ D   E   F
 | C      | 8                   | 9                   |
 | F      | 11                  | 12                  |
 
+### Edge Classification in Directed Graphs
+
+- Tree Edge: Discovery of a new node.
+- Back Edge: Goes back to an ancestor (indicates a cycle).
+- Forward Edge: Leads to a descendant in the DFS tree.
+- Cross Edge: Connects unrelated DFS trees.
+
+u and v represent two connected vertices where DFS explores an edge edge u→v<br>
+
+[    [     ]    ]               Tree/Forward
+u    v     v    u
+
+[    [     ]    ]               Back
+v    u     u    v
+
+[     ]   [     ]               Cross
+v     v   u     u
+
+| Pre/Post Order Representation | Edge Type |
+|------------------------------|------------|
+| `[    [     ]    ]`  | **Tree/Forward Edge** |
+| `u    v     v    u`  | |
+| `[    [     ]    ]`  | **Back Edge** |
+| `v    u     u    v`  | |
+| `[     ]   [     ]`  | **Cross Edge** |
+| `v     v   u     u`  | |
+
 ### Directed Graphs and Directed Acyclic Graph
+
+Definition: A directed graph is a graph where each edge has a direction. Goes from v to w.<br>
+
+#### Terminology
+```
+    A
+   / \
+  B   C
+ / \   \
+D   E   F
+```
+- A is the root (starting point). All other nodes are descendants of A.
+- E has descendants F, G, H.
+- C is the parent of D.
+- H is a child of E.
+
+#### Ancestry and Pre/Post Numbers
+
+A node u is an ancestor of v if:<br>
+`pre(u) < pre(v) < post(v) < post(u)`
