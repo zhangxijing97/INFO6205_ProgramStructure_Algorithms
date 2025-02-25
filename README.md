@@ -8,6 +8,7 @@
     - [Array](#array)
     - [Linked List](#linked-list)
     - [LaTeX Overview](#latex-overview)
+
   - [Lecture 2](#lecture-2)
     - [Stacks (LIFO – Last In, First Out)](#stacks-lifo--last-in-first-out)
     - [Queues (FIFO – First In, First Out)](#queues-fifo--first-in-first-out)
@@ -17,6 +18,7 @@
       - [Θ-notations Example](#θ-notations-example)
     - [Sorting Algorithms](#sorting-algorithms)
     - [Insertion Sort](#insertion-sort)
+
   - [Lecture 3](#lecture-3)
     - [Quicksort (Divide and Conquer Sorting Algorithm)](#quicksort-divide-and-conquer-sorting-algorithm)
     - [Counting Sort (O(n))](#counting-sort-on)
@@ -30,20 +32,40 @@
       - [Master Method Example Case 3](#master-method-example-case-3)
     - [Divide & Conquer (D-Q)](#divide--conquer-d-q)
     - [Binary Search (O(log n))](#binary-search-olog-n)
+
   - [Lecture 4](#lecture-4)
     - [Divide and Conquer](#divide-and-conquer)
     - [Binary Search](#binary-search)
     - [Merge Sort](#merge-sort)
     - [Find Majority Element](#find-majority-element)
     - [Find the Index of First “1” in a Sorted Binary Array](#find-the-index-of-first-1-in-a-sorted-binary-array)
-  - [Lecture 5](#lecture-5)
-    - [Graph Definition](#graph-definition)
-    - [Graph Representations](#graph-representations)
-      - [1. Adjacency Matrix (Good for dense graphs but uses more space)](#1-adjacency-matrix-good-for-dense-graphs-but-uses-more-space)
-      - [2. Adjacency List (Best for most cases)](#2-adjacency-list-best-for-most-cases)
-      - [3. Edge List (Simple, but hard to find neighbors)](#3-edge-list-simple-but-hard-to-find-neighbors)
-    - [Graph Exploration](#graph-exploration)
-      - [Explore Function](#explore-function)
+
+- [Lecture 5](#lecture-5)
+  - [Graph Definition](#graph-definition)
+  - [Graph Representations](#graph-representations)
+    - [Adjacency Matrix](#1-adjacency-matrix-good-for-dense-graphs-but-uses-more-space)
+    - [Adjacency List](#2-adjacency-list-best-for-most-cases)
+    - [Edge List](#3-edge-list-simple-but-hard-to-find-neighbors)
+    - [Which One Should You Use?](#which-one-should-you-use)
+  - [Explore](#explore)
+  - [Depth-First Search (DFS)](#depth-first-search)
+    - [DFS Pseudocode](#pseudocode-for-dfs)
+    - [DFS Runtime](#runtime-of-dfs)
+  - [Connected Components](#connected-components)
+  - [Pre- and Post- Orders in DFS](#pre--and-post--orders-in-dfs)
+  - [Edge Classification in Directed Graphs](#edge-classification-in-directed-graphs)
+  - [Directed Graphs and Directed Acyclic Graphs (DAGs)](#directed-graphs-and-directed-acyclic-graphs-dags)
+    - [Topological Ordering and DAGs](#topological-ordering-and-dags)
+
+- [Lecture 6](#lecture-6)
+  - [Strongly Connected Components (SCCs)](#strongly-connected-components)
+  - [Metagraph](#metagraph)
+  - [Algorithm to Compute SCCs](#algorithm-to-compute-sccs)
+  - [Breadth-First Search (BFS)](#breadth-first-search-bfs)
+    - [BFS Algorithm](#bfs-algorithm)
+    - [Time Complexity](#time-complexity)
+  - [Tree Data Structures](#tree-data-structures)
+  - [Binary Trees & Traversals](#binary-trees--traversals)
 
 ## Lecture 1
 
@@ -1287,3 +1309,18 @@ BFS(G, s)
 
 ### Binary Trees & Traversals
 
+- Pre-order: root, left subtree, right subtree
+- In-order: left subtree, root, right subtree
+- Post-order: left subtree, right subtree, root
+
+```
+         A
+        / \
+      B     C
+     / \   / \
+    D   E F   G
+```
+
+Pre-order: A B D E C F G<br>
+In-order: D B E A F C G<br>
+Post-order: D E B F G C A<br>
