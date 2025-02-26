@@ -1250,8 +1250,6 @@ Step 3: Run DFS on G in reverse postorder
 - BFS processes nodes in layers, expanding outward from the starting node.
 - Uses a queue (FIFO) to explore nodes in order of increasing distance.
 
-#### BFS Algorithm
-
 ### BFS Algorithm
 
 #### **Initialize Distance Table**
@@ -1324,3 +1322,52 @@ BFS(G, s)
 Pre-order: A B D E C F G<br>
 In-order: D B E A F C G<br>
 Post-order: D E B F G C A<br>
+
+## Lecture 7
+
+### Binary Search Tree
+
+A Binary Search Tree (BST) is a special type of binary tree where each node follows these rules:
+
+- Left subtree: Contains only nodes with values less than the parent node.
+- Right subtree: Contains only nodes with values greater than the parent node.
+- Both subtrees must also be BSTs.
+
+### Binary Heaps and Priority Queues
+
+Insert 10 ➔ Heap: [10]
+```
+  10
+```
+
+Insert 20 ➔ Heap: [20, 10]
+```
+    20
+   /
+ 10
+```
+
+Insert 15 ➔ Heap: [20, 10, 15]
+```
+    20
+   /  \
+ 10   15
+```
+
+Insert 30 ➔ Heap: [30, 20, 15, 10]
+```
+      30
+     /  \
+   20    15
+  /
+10
+```
+
+Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
+```
+        40
+       /  \
+     30    15
+    /  \
+  10   20
+```
