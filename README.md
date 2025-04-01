@@ -67,6 +67,8 @@
     - [Tree Data Structures](#tree-data-structures)
     - [Binary Trees & Traversals](#binary-trees--traversals)
 
+  - [Lecture 11](#lecture-11)
+
 ## Lecture 1
 
 ### Course Overview
