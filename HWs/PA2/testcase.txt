@@ -1,0 +1,9 @@
+python pa2.py --target purple --wordbank purp p ur le purpl
+python pa2.py --target hello --wordbank cat dog mouse
+python pa2.py --target "" --wordbank cat dog mouse
+python pa2.py --target aaaa --wordbank a aa
+python pa2.py --target enter --wordbank en t er
+python pa2.py --target flower --wordbank flow er f low
+python pa2.py --target apple --wordbank app le a pple
+python pa2.py --target coding --wordbank cod in coding co ding
+python pa2.py --target apple --wordbank
