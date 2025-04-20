@@ -1376,6 +1376,51 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
 
 ## Lecture 11
 
+### Dynamic Programming (DP) Steps
+
+#### 🔹 General Steps
+
+1. **State the Subproblem**  
+   Define what `dp[i]` means and include the optimization goal.
+
+2. **Define Decisions and Cost/Value**  
+   What are the choices at each step? How do you compute the result?
+
+3. **Recursion to Solve All Subproblems**  
+   Use smaller results to build bigger ones (bottom-up or top-down).
+
+4. **Count Subproblems (`nsub`)**  
+   How many unique states do you need to compute?
+
+5. **Time per Subproblem (`tsub`)**  
+   How much work is done to compute each state?
+
+6. **Total Time = `nsub × tsub`**  
+   Multiply the number of subproblems by the work per subproblem.
+
+---
+
+#### 🧪 Example: Coin Change (Fewest Coins to Make Amount `N = 7`)
+
+- **Subproblem:**  
+  `dp[i] = min number of coins to make amount i`
+
+- **Decisions:**  
+  Try each coin in `[1, 3, 5]`  
+  → `dp[i] = min(dp[i - 1] + 1, dp[i - 3] + 1, dp[i - 5] + 1)`
+
+- **Recursion:**  
+  Solve from `dp[0]` to `dp[7]` (bottom-up)
+
+- **nsub:**  
+  `0` to `7` → `nsub = 8`
+
+- **tsub:**  
+  3 choices (3 coins) → `tsub = 3`
+
+- **Total Time:**  
+  `8 × 3 = 24 operations`
+
 ### P1: Shortest Paths in DAGs
 
 Given a Directed Acyclic Graph (DAG) `G = (V, E)` with edge weights and a starting node `S`, compute the shortest path from `S` to every other node in the graph.
