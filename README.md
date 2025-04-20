@@ -1398,12 +1398,14 @@ Use **Dynamic Programming (DP)** and **Topological Sort** to solve subproblems i
 Let `dist[v]` be the shortest distance from source `S` to node `v`.
 
 **Decisions:**  
-Consider dist(u) to all parents of v and pick the min of dist(u) + l(u,v)
+Consider dist(u) to all parents of v and pick the min of dist(u) + weight(u → v)
 
 **Recurrence (DP Formula):**  
 ```
 dist[v] = min(dist[u] + weight(u → v)) for all (u → v)
 ```
+
+dist[v]: The shortest distance from the starting node (source S) to node v<br>
 
 E.g., D<br>
 dist[D] = min(dist[B] + weight(B → D)) for all (B → D)<br>
@@ -1473,7 +1475,8 @@ Total Work = 6 + 8 = 14 operations → O(|V| + |E|)<br>
 
 ### Topological Sort
 
-#### Graph Edges:
+#### Graph Edges
+
 <p align="center">
   <img src="Images/L11P102.png" width="45%">
 </p>
@@ -1488,36 +1491,33 @@ Total Work = 6 + 8 = 14 operations → O(|V| + |E|)<br>
 5 → 3
 ```
 
-#### Initial In-Degrees Table
+#### DFS-Based Topological Sort
 
-| Node | Incoming From     | In-Degree |
-|------|-------------------|-----------|
-| 0    | —                 | 0         |
-| 1    | 0                 | 1         |
-| 2    | 1, 4              | 2         |
-| 3    | 2, 5              | 2         |
-| 4    | 0                 | 1         |
-| 5    | 4                 | 1         |
+1. Start DFS from any unvisited node
+2. For each node:
+   - Recursively visit all neighbors first
+   - After visiting all children, add the node to a result stack
+3. At the end, **reverse the stack** to get the topological order
 
-#### Steps
+#### Step-by-Step DFS
 
-1. Start with node `0` (in-degree 0) → result: `[0]`  
-   → update: `1` and `4` now in-degree 0
+**Start from Node 0**:
+- Visit `0`
+  - Visit `1`
+    - Visit `2`
+      - Visit `3` → no unvisited neighbors → `stack = [3]`
+    - All neighbors done → add `2` → `stack = [3, 2]`
+  - Add `1` → `stack = [3, 2, 1]`
+  - Back to `0`, now visit `4`
+    - Visit `2` → already visited
+    - Visit `5`
+      - Visit `3` → already visited
+    - Done → add `5` → `stack = [3, 2, 1, 5]`
+    - Done → add `4` → `stack = [3, 2, 1, 5, 4]`
+- Done with `0` → add `0` → `stack = [3, 2, 1, 5, 4, 0]`
 
-2. Pick `4` → result: `[0, 4]`  
-   → update: `2` becomes 1, `5` becomes 0
-
-3. Pick `5` → result: `[0, 4, 5]`  
-   → update: `3` becomes 1
-
-4. Pick `1` → result: `[0, 4, 5, 1]`  
-   → update: `2` becomes 0
-
-5. Pick `2` → result: `[0, 4, 5, 1, 2]`  
-   → update: `3` becomes 0
-
-6. Pick `3` → result: `[0, 4, 5, 1, 2, 3]`
-
+Reverse the Stack:
+`[0, 4, 5, 1, 2, 3]`
 
 #### Final Topological Order
 [0, 4, 5, 1, 2, 3]
