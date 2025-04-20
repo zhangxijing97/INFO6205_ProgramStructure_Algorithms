@@ -1373,3 +1373,93 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
     /  \
   10   20
 ```
+
+## Lecture 11
+
+### P1: Shortest Paths in DAGs
+
+**Problem:**  
+Given a Directed Acyclic Graph (DAG) `G = (V, E)` with edge weights and a starting node `S`, compute the shortest path from `S` to every other node in the graph.
+
+---
+
+**Graph Example:**
+
+![Original DAG](Images/L11P101.png)
+
+**Key Idea:**  
+Use **Dynamic Programming (DP)** and **Topological Sort** to solve subproblems in the correct order.
+
+- **Subproblem:**  
+  Let `dist[v]` be the shortest distance from source `S` to node `v`.
+
+- **Recurrence (DP Formula):**  
+```
+dist[v] = min(dist[u] + weight(u → v)) for all (u → v)
+```
+
+- **Topological Order:**  
+Process nodes in topological order, so that for each node, all its parent distances are already known.
+
+---
+
+**Linearized Graph (Topological Sort):**
+
+![Linearized DAG](Images/L11P102.png)
+
+Topological order example:  
+```
+S → C → A → B → D → E
+```
+
+
+---
+
+**Step-by-Step Computation:**
+
+| Node | Computation                                   | dist |
+|------|-----------------------------------------------|------|
+| S    | Start node                                    | 0    |
+| C    | S → C = 0 + 2                                 | 2    |
+| A    | min(S→A, C→A) = min(0+1, 2+4) = 1             | 1    |
+| B    | A → B = 1 + 6                                 | 7    |
+| D    | min(C→D, B→D) = min(2+3, 7+1) = 5             | 5    |
+| E    | min(B→E, D→E) = min(7+2, 5+1) = 6             | 6    |
+
+---
+
+**Final Distances from `S`:**
+
+```text
+dist[S] = 0
+dist[C] = 2
+dist[A] = 1
+dist[B] = 7
+dist[D] = 5
+dist[E] = 6
+```
+
+**Algorithm Overview:**
+```
+Initialize dist[v] = ∞ for all nodes
+dist[S] = 0
+
+for v in topological_order:
+    for (u → v) in incoming_edges:
+        dist[v] = min(dist[v], dist[u] + weight(u, v))
+```
+
+**Time Complexity Analysis**
+
+- **Topological Sorting:**  
+  Takes `O(|V| + |E|)` time using DFS or Kahn’s algorithm.
+
+- **Processing Each Node:**  
+  For every node `v`, we look at all incoming edges `(u → v)` once — total across all nodes is `O(|E|)`.
+
+- **Distance Updates:**  
+  Each update (`dist[v] = min(dist[v], dist[u] + weight(u, v))`) is `O(1)` and happens per edge.
+
+**Total Time Complexity:**  
+```text
+O(|V| + |E|) — Linear in size of the graph
