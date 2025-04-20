@@ -1381,38 +1381,25 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
 **Problem:**  
 Given a Directed Acyclic Graph (DAG) `G = (V, E)` with edge weights and a starting node `S`, compute the shortest path from `S` to every other node in the graph.
 
-<p align="center">
-  <img src="Images/L11P101.png" width="45%" />
-  <img src="Images/L11P102.png" width="45%" />
-</p>
+![Original DAG](Images/L11P101.png)
+
+**Linearized Graph (Topological Sort):**
+
+S → C → A → B → D → E<br>
+S → A
+C → D
+B → E
 
 **Key Idea:**  
 Use **Dynamic Programming (DP)** and **Topological Sort** to solve subproblems in the correct order.
 
 - **Subproblem:**  
-  Let `dist[v]` be the shortest distance from source `S` to node `v`.
+Let `dist[v]` be the shortest distance from source `S` to node `v`.
 
 - **Recurrence (DP Formula):**  
 ```
 dist[v] = min(dist[u] + weight(u → v)) for all (u → v)
 ```
-
-- **Topological Order:**  
-Process nodes in topological order, so that for each node, all its parent distances are already known.
-
----
-
-**Linearized Graph (Topological Sort):**
-
-![Linearized DAG](Images/L11P102.png)
-
-Topological order example:  
-```
-S → C → A → B → D → E
-```
-
-
----
 
 **Step-by-Step Computation:**
 
@@ -1424,8 +1411,6 @@ S → C → A → B → D → E
 | B    | A → B = 1 + 6                                 | 7    |
 | D    | min(C→D, B→D) = min(2+3, 7+1) = 5             | 5    |
 | E    | min(B→E, D→E) = min(7+2, 5+1) = 6             | 6    |
-
----
 
 **Final Distances from `S`:**
 
@@ -1460,5 +1445,4 @@ for v in topological_order:
   Each update (`dist[v] = min(dist[v], dist[u] + weight(u, v))`) is `O(1)` and happens per edge.
 
 **Total Time Complexity:**  
-```text
 O(|V| + |E|) — Linear in size of the graph
