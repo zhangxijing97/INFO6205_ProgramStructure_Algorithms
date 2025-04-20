@@ -1457,8 +1457,6 @@ To do that, we:
 1. Compute `dist[v]` for each node → one time per node → O(|V|)
 2. Relax (update) each edge `(u → v)` one time → O(|E|)
 
----
-
 **Example:**
 
 In this graph:
@@ -1501,6 +1499,7 @@ Total Work = 6 + 8 = 14 operations → O(|V| + |E|)<br>
 
 #### Step-by-Step DFS
 
+```
 **Start from Node 0**:
 - Visit `0`
   - Visit `1`
@@ -1516,10 +1515,58 @@ Total Work = 6 + 8 = 14 operations → O(|V| + |E|)<br>
     - Done → add `4` → `stack = [3, 2, 1, 5, 4]`
 - Done with `0` → add `0` → `stack = [3, 2, 1, 5, 4, 0]`
 
-Reverse the Stack:
-`[0, 4, 5, 1, 2, 3]`
+Reverse the Stack = `[0, 4, 5, 1, 2, 3]`
+```
 
 #### Final Topological Order
 [0, 4, 5, 1, 2, 3]
+
+#### Example 1
+
+**Graph:**
+```
+1 → 2
+1 → 3
+3 → 4
+2 → 4
+4 → 5
+```
+
+**DFS Steps:**
+```
+Start from 1  
+→ visit 2 → 4 → 5 → add 5, 4, 2  
+→ back to 1 → visit 3 → 4 (already visited) → add 3  
+→ add 1
+
+**Stack before reverse:**
+[5, 4, 2, 3, 1]
+
+**Topological Order:**
+[5, 4, 2, 3, 1]
+```
+
+#### Example 2
+**Graph:**
+```
+A → D
+B → D
+C → E
+D → F
+E → F
+```
+
+**DFS Steps:**
+```
+Start from A → D → F → add F, D  
+Start from B → D (already visited)  
+Start from C → E → F (already visited) → add E, C  
+Add B, A
+
+**Stack before reverse:**
+[F, D, E, C, B, A]
+**Topological Order:**
+[A, B, C, E, D, F]
+```
 
 ### P2: 
