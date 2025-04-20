@@ -1543,7 +1543,7 @@ Start from 1
 [5, 4, 2, 3, 1]
 
 **Topological Order:**
-[5, 4, 2, 3, 1]
+[1, 3, 2, 4, 5]
 ```
 
 #### Example 2
@@ -1558,15 +1558,27 @@ E → F
 
 **DFS Steps:**
 ```
-Start from A → D → F → add F, D  
-Start from B → D (already visited)  
-Start from C → E → F (already visited) → add E, C  
-Add B, A
+1. **Start from A**  
+   - A → D → F  
+   - F has no neighbors → add `F`  
+   - Back to D → add `D`  
+   - Back to A → add `A`  
+   → stack so far: `[F, D, A]`
+
+2. **Next unvisited node: B**  
+   - B → D (already visited) → add `B`  
+   → stack: `[F, D, A, B]`
+
+3. **Next unvisited node: C**  
+   - C → E → F (already visited)  
+   - Add `E`, then `C`  
+   → final stack: `[F, D, A, B, E, C]`
 
 **Stack before reverse:**
-[F, D, E, C, B, A]
+[F, D, A, B, E, C]
+
 **Topological Order:**
-[A, B, C, E, D, F]
+[C, E, B, A, D, F]
 ```
 
 ### P2: 
