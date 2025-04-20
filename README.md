@@ -1394,18 +1394,21 @@ B → E
 **Key Idea:**  
 Use **Dynamic Programming (DP)** and **Topological Sort** to solve subproblems in the correct order.
 
-- **Subproblem:**  
+**Subproblem:**  
 Let `dist[v]` be the shortest distance from source `S` to node `v`.
 
-- **Recurrence (DP Formula):**  
+**Decisions:**  
+Consider dist(u) to all parents of v and pick the min of dist(u) + l(u,v)
+
+**Recurrence (DP Formula):**  
 ```
 dist[v] = min(dist[u] + weight(u → v)) for all (u → v)
 ```
 
-E.g., D
-dist[D] = min(dist[B] + weight(B → D)) for all (B → D)
-= min{dist[B] + weight(B → D), dist[C] + weight(C → D)}
-= min{dist[B] + 1, dist[C] + 3}
+E.g., D<br>
+dist[D] = min(dist[B] + weight(B → D)) for all (B → D)<br>
+= min{dist[B] + weight(B → D), dist[C] + weight(C → D)}<br>
+= min{dist[B] + 1, dist[C] + 3}<br>
 
 **Step-by-Step Computation:**
 
@@ -1441,14 +1444,30 @@ for v in topological_order:
 
 **Time Complexity Analysis**
 
-- **Topological Sorting:**  
-  Takes `O(|V| + |E|)` time using DFS or Kahn’s algorithm.
+- How many subproblems? O(|V| + |E|)
+- Running time per subproblem? O(1)
+- Total Running time: O(|V| + |E|)
 
-- **Processing Each Node:**  
-  For every node `v`, we look at all incoming edges `(u → v)` once — total across all nodes is `O(|E|)`.
+We want to find the shortest distance from `S` to every node in a DAG.
 
-- **Distance Updates:**  
-  Each update (`dist[v] = min(dist[v], dist[u] + weight(u, v))`) is `O(1)` and happens per edge.
+To do that, we:
 
-**Total Time Complexity:**  
-O(|V| + |E|) — Linear in size of the graph
+1. Compute `dist[v]` for each node → one time per node → O(|V|)
+2. Relax (update) each edge `(u → v)` one time → O(|E|)
+
+---
+
+**Example:**
+
+In this graph:
+
+- Nodes: `S, C, A, B, D, E` → 6 nodes → |V| = 6
+- Edges: 8 total connections → |E| = 8
+
+We do:
+- 6 distance calculations → one per node
+- 8 updates using the formula:  dist[v] = min(dist[v], dist[u] + weight(u → v))
+
+Total Work = 6 + 8 = 14 operations → O(|V| + |E|)<br>
+
+### P2: 
