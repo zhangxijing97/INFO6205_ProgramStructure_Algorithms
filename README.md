@@ -1402,6 +1402,11 @@ Let `dist[v]` be the shortest distance from source `S` to node `v`.
 dist[v] = min(dist[u] + weight(u → v)) for all (u → v)
 ```
 
+E.g., D
+dist[D] = min(dist[B] + weight(B → D)) for all (B → D)
+= min{dist[B] + weight(B → D), dist[C] + weight(C → D)}
+= min{dist[B] + 1, dist[C] + 3}
+
 **Step-by-Step Computation:**
 
 | Node | Computation                                   | dist |
