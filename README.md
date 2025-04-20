@@ -1378,7 +1378,6 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
 
 ### P1: Shortest Paths in DAGs
 
-**Problem:**  
 Given a Directed Acyclic Graph (DAG) `G = (V, E)` with edge weights and a starting node `S`, compute the shortest path from `S` to every other node in the graph.
 
 <p align="center">
