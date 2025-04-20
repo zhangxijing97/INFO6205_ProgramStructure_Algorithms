@@ -1409,6 +1409,8 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
   Try each coin in `[1, 3, 5]`  
   → `dp[i] = min(dp[i - 1] + 1, dp[i - 3] + 1, dp[i - 5] + 1)`
 
+  _E.g.,_ `dp[7] = min(dp[7 - 1] + 1, dp[7 - 3] + 1, dp[7 - 5] + 1)`
+
 - **Recursion:**  
   Solve from `dp[0]` to `dp[7]` (bottom-up)
 
