@@ -1381,8 +1381,9 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
 **Problem:**  
 Given a Directed Acyclic Graph (DAG) `G = (V, E)` with edge weights and a starting node `S`, compute the shortest path from `S` to every other node in the graph.
 
-<!-- ![Original DAG](Images/L11P101.png) -->
-<img src="Images/L11P101.png" width="100"/>
+<p align="center">
+  <img src="Images/L11P101.png" width="45%">
+</p>
 
 **Linearized Graph (Topological Sort):**
 
