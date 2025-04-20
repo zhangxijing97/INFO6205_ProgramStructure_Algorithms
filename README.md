@@ -1387,9 +1387,9 @@ Given a Directed Acyclic Graph (DAG) `G = (V, E)` with edge weights and a starti
 **Linearized Graph (Topological Sort):**
 
 S → C → A → B → D → E<br>
-S → A
-C → D
-B → E
+S → A<br>
+C → D<br>
+B → E<br>
 
 **Key Idea:**  
 Use **Dynamic Programming (DP)** and **Topological Sort** to solve subproblems in the correct order.
@@ -1469,5 +1469,57 @@ We do:
 - 8 updates using the formula:  dist[v] = min(dist[v], dist[u] + weight(u → v))
 
 Total Work = 6 + 8 = 14 operations → O(|V| + |E|)<br>
+
+
+### Topological Sort
+
+#### Graph Edges:
+<p align="center">
+  <img src="Images/L11P102.png" width="45%">
+</p>
+
+```
+0 → 1
+0 → 4
+1 → 2
+4 → 2
+4 → 5
+2 → 3
+5 → 3
+```
+
+#### Initial In-Degrees Table
+
+| Node | Incoming From     | In-Degree |
+|------|-------------------|-----------|
+| 0    | —                 | 0         |
+| 1    | 0                 | 1         |
+| 2    | 1, 4              | 2         |
+| 3    | 2, 5              | 2         |
+| 4    | 0                 | 1         |
+| 5    | 4                 | 1         |
+
+#### Steps
+
+1. Start with node `0` (in-degree 0) → result: `[0]`  
+   → update: `1` and `4` now in-degree 0
+
+2. Pick `4` → result: `[0, 4]`  
+   → update: `2` becomes 1, `5` becomes 0
+
+3. Pick `5` → result: `[0, 4, 5]`  
+   → update: `3` becomes 1
+
+4. Pick `1` → result: `[0, 4, 5, 1]`  
+   → update: `2` becomes 0
+
+5. Pick `2` → result: `[0, 4, 5, 1, 2]`  
+   → update: `3` becomes 0
+
+6. Pick `3` → result: `[0, 4, 5, 1, 2, 3]`
+
+
+#### Final Topological Order
+[0, 4, 5, 1, 2, 3]
 
 ### P2: 
