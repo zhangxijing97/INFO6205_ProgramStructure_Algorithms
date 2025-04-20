@@ -1409,19 +1409,27 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
   Try each coin in `[1, 3, 5]`  
   → `dp[i] = min(dp[i - 1] + 1, dp[i - 3] + 1, dp[i - 5] + 1)`
 
-  _E.g.,_ `dp[7] = min(dp[7 - 1] + 1, dp[7 - 3] + 1, dp[7 - 5] + 1)`
+  **Example for `dp[7]`:**  
+  To compute the fewest coins for amount 7:
+  - Try using a 1-coin → `dp[6] + 1`
+  - Try using a 3-coin → `dp[4] + 1`
+  - Try using a 5-coin → `dp[2] + 1`  
+  Choose the smallest result.
 
 - **Recursion:**  
   Solve from `dp[0]` to `dp[7]` (bottom-up)
 
 - **nsub:**  
   `0` to `7` → `nsub = 8`
+  `N + 1` subproblems → `O(N)`
 
 - **tsub:**  
   3 choices (3 coins) → `tsub = 3`
+  Try each of `C` coins → `O(C)`
 
 - **Total Time:**  
   `8 × 3 = 24 operations`
+  O(N × C)
 
 ### P1: Shortest Paths in DAGs
 
