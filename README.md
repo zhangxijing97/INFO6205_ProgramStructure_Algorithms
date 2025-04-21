@@ -1814,3 +1814,106 @@ Relax all edges again:
 
 - Shortest path from `1 → 2` = **4**
 - Shortest path from `1 → 3` = **2** (via `1 → 2 → 3`)
+
+### P3: All Pairs Shortest Path
+
+We want to compute the shortest distance between every pair of nodes.<br>
+
+**Bottom-up**
+
+```
+for i = 1 to n:
+    for j = 1 to n:
+        dist(i, j, 0) = ∞
+
+for all (i, j) ∈ E:
+    dist(i, j, 0) = ℓ(i, j)
+
+
+for k = 1 to n:
+    for i = 1 to n:
+        for j = 1 to n:
+            dist(i, j, k) = min(
+                dist(i, k, k-1) + dist(k, j, k-1),
+                dist(i, j, k-1)
+            )
+```
+
+- dist(i, j, n) = shortest path from i to j, possibly passing through any nodes {1, 2, ..., n}
+- ℓ(i, j) = direct edge weight from i to j
+- k = intermediate node currently allowed in the path from i to j
+- i = the starting node
+- j = the ending node
+
+### 🧪 Floyd-Warshall Bottom-Up Example
+
+#### 🚦 Graph
+
+Nodes: 1, 2, 3  <br>
+Edges:
+- 1 → 2 (cost 4)
+- 2 → 3 (cost 3)
+- 1 → 3 (cost 10)
+
+
+#### 🧱 Initial Matrix `dist(i, j, 0)`
+
+|     | 1   | 2   | 3   |
+|-----|-----|-----|-----|
+| 1   | 0   | 4   | 10  |
+| 2   | ∞   | 0   | 3   |
+| 3   | ∞   | ∞   | 0   |
+
+- Distance to self = 0  
+- Direct edge = given weight  
+- No edge = ∞ (infinity)
+
+#### 🔄 k = 1 (Allow node 1 as intermediate)
+
+Update rule:
+
+```python
+dist(i, j, 1) = min(
+    dist(i, 1, 0) + dist(1, j, 0),
+    dist(i, j, 0)
+)
+```
+
+| i → j | Calculation                       | Result |
+|-------|----------------------- -----------|--------|
+| 1 → 1 | min(0 + 0, 0)                     | 0 ✅    |
+| 1 → 2 | min(0 + 4, 4)                     | 4 ✅    |
+| 1 → 3 | min(0 + 10, 10)                   | 10 ✅   |
+| 2 → 3 | min(∞ + 10, 3)                    | 3 ✅    |
+| others | no improvement                   | stays the same |
+
+#### 🔄 k = 2 (Allow node 2 as intermediate)
+
+| i → j | Calculation                      | Result |
+|-------|----------------------------------|--------|
+| 1 → 3 | min(4 + 3, 10) = 7               | ✅ improved |
+
+Updated matrix:
+
+|     | 1   | 2   | 3   |
+|-----|-----|-----|-----|
+| 1   | 0   | 4   | 7   |
+| 2   | ∞   | 0   | 3   |
+| 3   | ∞   | ∞   | 0   |
+
+#### 🔄 k = 3 (Allow node 3 as intermediate)
+
+Update rule:
+dist(i, j, 3) = min( dist(i, 3, 2) + dist(3, j, 2), dist(i, j, 2) )
+
+Node 3 has no outgoing edges to help improve any path.
+
+✅ Matrix remains unchanged.
+
+#### ✅ Final Shortest Path Matrix
+
+|     | 1   | 2   | 3   |
+|-----|-----|-----|-----|
+| 1   | 0   | 4   | 7   |
+| 2   | ∞   | 0   | 3   |
+| 3   | ∞   | ∞   | 0   |
