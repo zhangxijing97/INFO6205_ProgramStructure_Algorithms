@@ -1679,11 +1679,11 @@ Case 2: Use the `i`th edge from `u → v`
 
 ```text
 d(v, i) =
-    0                  if v = s
-    ∞                  if v ≠ s and i = 0
+    0                      if v = s
+    ∞                      if v ≠ s and i = 0
     min(
         d(v, i - 1),
-        min over all u such that (u → v) ∈ E: d(u, i - 1) + c(u, v)
+        d(u, i - 1) + cost(u → v) for every edge u → v
     )
 ```
 
@@ -1701,15 +1701,74 @@ This is efficient for graphs where `|E|` is not too large compared to `|V|`.
 #### 🧪 Bellman-Ford Pseudocode
 
 ```python
-for v in V:
-    if v == s:
-        dist[v][0] = 0
-    else:
-        dist[v][0] = ∞
+for v = 1 to n # Loop over every node v in the graph
+    if v ≠ s then # If v is not the source node s
+        M[v, 0] = ∞
+    else
+        M[s, 0] = 0
 
-for i in range(1, |V|):
-    for v in V:
-        dist[v][i] = dist[v][i - 1]
-        for (u, v) in E:
-            dist[v][i] = min(dist[v][i], dist[u][i - 1] + cost[u][v])
+for i = 1 to n - 1 # loop from 1 to n - 1, represents the number of edges allowed in the path
+    for v = 1 to n
+        M[v, i] = M[v, i - 1] # Start with previous distance (no new edge used yet)
+        for every edge (u → v) # Try all edges that end at v
+            M[v, i] = min(M[v, i], M[u, i - 1] + c[u, v]) # current best distance to v, distance to u + cost from u to v
 ```
+
+#### 🧮 Bellman-Ford Example (M[v, i] Table)
+
+**Graph:**
+
+- Nodes: 1, 2, 3
+- Source: 1
+- Edges:
+  - 1 → 2 (weight = 4)
+  - 1 → 3 (weight = 5)
+  - 2 → 3 (weight = -2)
+
+We’ll fill the table `M[v, i]`, where:
+- `v` = destination node
+- `i` = max number of edges allowed
+- `M[v, i]` = shortest distance from node 1 to node `v` using at most `i` edges
+
+##### 🔹 Initialization (i = 0)
+
+| Node `v` | M[v, 0] |
+|----------|---------|
+| 1        | 0       |
+| 2        | ∞       |
+| 3        | ∞       |
+
+Only the source has a distance of 0 at the start.
+
+##### 🔁 After 1st Iteration (i = 1)
+
+Relax all edges:
+
+- 1 → 2 → `M[2,1] = min(∞, 0 + 4) = 4`
+- 1 → 3 → `M[3,1] = min(∞, 0 + 5) = 5`
+- 2 → 3 → skipped (M[2,0] = ∞)
+
+| Node `v` | M[v, 1] |
+|----------|---------|
+| 1        | 0       |
+| 2        | 4       |
+| 3        | 5       |
+
+##### 🔁 After 2nd Iteration (i = 2)
+
+Relax all edges again:
+
+- 2 → 3 → `M[3,2] = min(5, 4 + (-2)) = 2`
+- Others give no better result
+
+| Node `v` | M[v, 2] |
+|----------|---------|
+| 1        | 0       |
+| 2        | 4       |
+| 3        | 2       |
+
+
+##### ✅ Final Results
+
+- Shortest path from `1 → 2` = **4**
+- Shortest path from `1 → 3` = **2** (via `1 → 2 → 3`)
