@@ -1707,9 +1707,9 @@ for v = 1 to n # Loop over every node v in the graph
     else
         M[s, 0] = 0
 
-for i = 1 to n - 1 # loop from 1 to n - 1, represents the number of edges allowed in the path
-    for v = 1 to n
-        M[v, i] = M[v, i - 1] # Start with previous distance (no new edge used yet)
+for i = 1 to n - 1 # Number of edges allowed in the path, each round allows paths with one more edge
+    for v = 1 to n # Goes through every node v
+        M[v, i] = M[v, i - 1] # Copying best known distance(at most i - 1 edges) to node v
         for every edge (u → v) # Try all edges that end at v
             M[v, i] = min(M[v, i], M[u, i - 1] + c[u, v]) # current best distance to v, distance to u + cost from u to v
 ```
@@ -1742,6 +1742,26 @@ Only the source has a distance of 0 at the start.
 
 **🔁 After 1st Iteration (i = 1)**
 
+```
+v = 1  
+Copy M[1, 1] = M[1, 0] = 0  
+There are no edges ending at node 1 → nothing to relax  
+
+v = 2  
+Copy M[2, 1] = M[2, 0] = ∞  
+Edges ending at 2: 1 → 2  
+M[2, 1] = min(∞, M[1, 0] + 4) = min(∞, 0 + 4) = 4  
+
+v = 3  
+Copy M[3, 1] = M[3, 0] = ∞  
+Edges ending at 3: 1 → 3  
+M[3, 1] = min(∞, M[1, 0] + 5) = min(∞, 0 + 5) = 5  
+
+Edges ending at 3: 2 → 3  
+M[3, 1] = min(M[3, 1], M[2, 0] + cost[2 → 3])  
+M[2, 0] = ∞, so the best value did not change  
+```
+
 Relax all edges:
 
 - 1 → 2 → `M[2,1] = min(∞, 0 + 4) = 4`
@@ -1755,6 +1775,29 @@ Relax all edges:
 | 3        | 5       |
 
 **🔁 After 2nd Iteration (i = 2)**
+
+```
+v = 1  
+M[1, 2] = M[1, 1] = 0  
+There are no edges ending at node 1 → nothing to relax  
+
+v = 2  
+Copy M[2, 2] = M[2, 1] = 4  
+Edges ending at 2: 1 → 2  
+M[2, 2] = min(4, M[1, 1] + 4) = min(4, 0 + 4) = 4  
+✅ No improvement — value stays 4  
+
+v = 3  
+Copy M[3, 2] = M[3, 1] = 5  
+Edges ending at 3:  
+1 → 3:  
+M[3, 2] = min(5, M[1, 1] + 5) = min(5, 0 + 5) = 5  
+✅ No improvement  
+
+2 → 3:  
+M[3, 2] = min(5, M[2, 1] + (-2)) = min(5, 4 - 2) = 2  
+✅ Improved — update M[3, 2] to 2  
+```
 
 Relax all edges again:
 
