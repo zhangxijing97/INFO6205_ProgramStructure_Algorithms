@@ -1730,7 +1730,7 @@ We’ll fill the table `M[v, i]`, where:
 - `i` = max number of edges allowed
 - `M[v, i]` = shortest distance from node 1 to node `v` using at most `i` edges
 
-##### 🔹 Initialization (i = 0)
+**🔹 Initialization (i = 0)**
 
 | Node `v` | M[v, 0] |
 |----------|---------|
@@ -1740,7 +1740,7 @@ We’ll fill the table `M[v, i]`, where:
 
 Only the source has a distance of 0 at the start.
 
-##### 🔁 After 1st Iteration (i = 1)
+**🔁 After 1st Iteration (i = 1)**
 
 Relax all edges:
 
@@ -1754,7 +1754,7 @@ Relax all edges:
 | 2        | 4       |
 | 3        | 5       |
 
-##### 🔁 After 2nd Iteration (i = 2)
+**🔁 After 2nd Iteration (i = 2)**
 
 Relax all edges again:
 
@@ -1767,8 +1767,7 @@ Relax all edges again:
 | 2        | 4       |
 | 3        | 2       |
 
-
-##### ✅ Final Results
+**✅ Final Results**
 
 - Shortest path from `1 → 2` = **4**
 - Shortest path from `1 → 3` = **2** (via `1 → 2 → 3`)
