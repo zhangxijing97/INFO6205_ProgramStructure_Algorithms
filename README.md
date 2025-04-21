@@ -1398,8 +1398,6 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
 6. **Total Time = `nsub × tsub`**  
    Multiply the number of subproblems by the work per subproblem.
 
----
-
 #### 🧪 Example: Coin Change (Fewest Coins to Make Amount `N = 7`)
 
 - **Subproblem:**  
@@ -1414,22 +1412,22 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
   - Try using a 1-coin → `dp[6] + 1`
   - Try using a 3-coin → `dp[4] + 1`
   - Try using a 5-coin → `dp[2] + 1`  
-  Choose the smallest result.
+  - Choose the smallest result
 
 - **Recursion:**  
   Solve from `dp[0]` to `dp[7]` (bottom-up)
 
 - **nsub:**  
-  `0` to `7` → `nsub = 8`
-  `N + 1` subproblems → `O(N)`
+  `0` to `7` → `nsub = 8`<br>
+  `N + 1` subproblems → `O(N)`<br>
 
 - **tsub:**  
-  3 choices (3 coins) → `tsub = 3`
-  Try each of `C` coins → `O(C)`
+  3 choices (3 coins) → `tsub = 3`<br>
+  Try each of `C` coins → `O(C)`<br>
 
 - **Total Time:**  
-  `8 × 3 = 24 operations`
-  O(N × C)
+  `8 × 3 = 24 operations`<br>
+  O(N × C)<br>
 
 ### P1: Shortest Paths in DAGs
 
@@ -1636,4 +1634,82 @@ E → F
 [C, E, B, A, D, F]
 ```
 
-### P2: 
+### P2: Shortest Paths with Negative Edge Weights (Bellman-Ford)
+
+<p align="center">
+  <img src="Images/L11P201.png" width="45%">
+</p>
+
+#### 📌 Problem
+
+Given a graph `G = (V, E)` with real-valued edge weights (some can be negative),  
+and a source node `s`, find the shortest path from `s` to all other nodes in `G`.
+
+#### ❌ Why Dijkstra Fails
+
+Dijkstra assumes once the shortest path to a node is found, it will never get better.  
+But with **negative edges**, a later path might reduce the cost.
+
+**Example:**
+
+- Path: `s → 1 → 3` → cost = `3 + (-2) = 1`  
+- Path: `s → 3` → cost = `2`  
+Dijkstra picks `s → 3` too early and misses the better path through `1`.
+
+#### ✅ Why Bellman-Ford Works
+
+Bellman-Ford allows updating a node's distance **multiple times**,  
+by relaxing **all edges** up to `|V| - 1` times.  
+Each round considers paths with one more edge.
+
+### 🔹 DP Formulation
+
+Let `d(v, i)` = the shortest distance from source `s` to node `v`  
+using **at most `i` edges**
+
+#### 🔁 Recurrence (Two Cases)
+
+Case 1: Don’t use the `i`th edge  
+→ `d(v, i) = d(v, i - 1)`
+
+Case 2: Use the `i`th edge from `u → v`  
+→ `d(v, i) = d(u, i - 1) + c(u, v)`
+
+#### 🧠 Final Recursive Formula
+
+```text
+d(v, i) =
+    0                  if v = s
+    ∞                  if v ≠ s and i = 0
+    min(
+        d(v, i - 1),
+        min over all u such that (u → v) ∈ E: d(u, i - 1) + c(u, v)
+    )
+```
+
+#### ⏱ Time Complexity
+
+- Number of passes: `|V| - 1`  
+- In each pass, we check all `|E|` edges
+
+**Total Time:**  
+`O(|V| × |E|)`
+
+This is efficient for graphs where `|E|` is not too large compared to `|V|`.
+
+
+#### 🧪 Bellman-Ford Pseudocode
+
+```python
+for v in V:
+    if v == s:
+        dist[v][0] = 0
+    else:
+        dist[v][0] = ∞
+
+for i in range(1, |V|):
+    for v in V:
+        dist[v][i] = dist[v][i - 1]
+        for (u, v) in E:
+            dist[v][i] = min(dist[v][i], dist[u][i - 1] + cost[u][v])
+```
