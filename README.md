@@ -67,7 +67,16 @@
     - [Tree Data Structures](#tree-data-structures)
     - [Binary Trees & Traversals](#binary-trees--traversals)
 
-  - [Lecture 11](#lecture-11)
+- [Lecture 11](#lecture-11)
+  - [Dynamic Programming (DP) Steps](#dynamic-programming-dp-steps)
+    - [General Steps](#-general-steps)
+    - [Example: Coin Change](#-example-coin-change-fewest-coins-to-make-amount-n--7)
+  - [P1: Shortest Paths in DAGs](#p1-shortest-paths-in-dags)
+  - [Topological Sort](#topological-sort-1)
+  - [P2: Bellman-Ford – Shortest Paths with Negative Edge Weights](#p2-shortest-paths-with-negative-edge-weights-bellman-ford)
+  - [P3: Floyd-Warshall – All Pairs Shortest Path](#p3-all-pairs-shortest-path)
+    - [Bottom-Up Implementation](#bottom-up)
+    - [Top-Down Floyd-Warshall (Recursive + Memoization)](#top-down)
 
 ## Lecture 1
 
