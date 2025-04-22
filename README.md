@@ -1819,7 +1819,7 @@ Relax all edges again:
 
 We want to compute the shortest distance between every pair of nodes.<br>
 
-**Bottom-up**
+### Bottom-up
 
 ```
 for i = 1 to n:
@@ -1921,3 +1921,86 @@ Node 3 has no outgoing edges to help improve any path.
 | 1   | 0   | 4   | 7   |
 | 2   | ∞   | 0   | 3   |
 | 3   | ∞   | ∞   | 0   |
+
+### Top-down
+
+```
+# Recursive Floyd-Warshall with memoization
+def FW_Recur(V, i, j, k, w, memo):
+    if memo[i][j][k] is not None:
+        return memo[i][j][k]
+
+    if k == 0:
+        if i == j:
+            return 0
+        return w[i][j]  # direct edge weight, or ∞ if no edge
+
+    without_k = FW_Recur(V, i, j, k - 1, w, memo)
+    with_k = FW_Recur(V, i, k, k - 1, w, memo) + FW_Recur(V, k, j, k - 1, w, memo)
+
+    memo[i][j][k] = min(without_k, with_k)
+    return memo[i][j][k]
+
+# Top-level Floyd-Warshall function
+def Floyd_Warshall(V, w):
+    n = len(V)
+    memo = [[[None for _ in range(n + 1)] for _ in range(n)] for _ in range(n)]
+
+    delta = [[0 for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            delta[i][j] = FW_Recur(V, i, j, n, w, memo)
+    return delta
+```
+
+- V is the list of vertices (e.g., [0, 1, 2])
+
+- w[i][j] is the adjacency matrix (weights); use a large value to represent ∞
+
+- memo[i][j][k] caches the result of dist(i → j) using nodes 1..k as intermediates
+
+## Lecture 12
+
+### Chain of Thought for Designing DP Algorithms
+
+- **What are my subproblems?**  
+  Identify how the problem can be broken into smaller parts.
+
+- **What are the decisions to solve each subproblem?**  
+  Figure out the choices you can make at each step.
+
+- **Recursive formulation – Base case**  
+  Write the recurrence relation and clearly define the base cases.
+
+- **How many subproblems?**  
+  Count the total unique subproblem states.
+
+- **What is the running time per subproblem?**  
+  Determine how much work is done for each one.
+
+- **What is the overall running time?**  
+  Multiply the number of subproblems by time per subproblem.
+
+### P5: Rod Cutting — Chain of Thought
+
+- **What are my subproblems?**  
+  Let `r[n]` be the maximum revenue obtainable for a rod of length `n`.
+
+- **What are the decisions to solve each subproblem?**  
+  Try all possible first cuts of length `i` (from 1 to n),  
+  and take the price `p[i] + r[n - i]`.
+
+- **Recursive formulation – Base case**  
+```
+r[n] = max(p[i] + r[n - i]) for i = 1 to n
+r[0] = 0
+```
+
+- **How many subproblems?**  
+One for each length `n` → **O(n)** subproblems.
+
+- **What is the running time per subproblem?**  
+We try all `i = 1 to n` for each `n` → **O(n)** time per subproblem.
+
+- **What is the overall running time?**  
+**O(n^2)**
