@@ -1872,11 +1872,8 @@ Edges:
 
 Update rule:
 
-```python
-dist(i, j, 1) = min(
-    dist(i, 1, 0) + dist(1, j, 0),
-    dist(i, j, 0)
-)
+```
+dist(i, j, 1) = min( dist(i, 1, 0) + dist(1, j, 0), dist(i, j, 0) )
 ```
 
 | i → j | Calculation                       | Result |
@@ -1888,6 +1885,11 @@ dist(i, j, 1) = min(
 | others | no improvement                   | stays the same |
 
 #### 🔄 k = 2 (Allow node 2 as intermediate)
+
+Update rule:
+```
+dist(i, j, 2) = min( dist(i, 2, 1) + dist(2, j, 1), dist(i, j, 1) )
+```
 
 | i → j | Calculation                      | Result |
 |-------|----------------------------------|--------|
@@ -1904,7 +1906,9 @@ Updated matrix:
 #### 🔄 k = 3 (Allow node 3 as intermediate)
 
 Update rule:
+```
 dist(i, j, 3) = min( dist(i, 3, 2) + dist(3, j, 2), dist(i, j, 2) )
+```
 
 Node 3 has no outgoing edges to help improve any path.
 
