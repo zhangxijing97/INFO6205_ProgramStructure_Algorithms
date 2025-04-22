@@ -2116,3 +2116,69 @@ The maximum revenue for a rod of length **4** is:
 ```
 r[4] = 10
 ```
+
+### P6: Knapsack with Repetition
+
+#### Problem
+Given `n` items, each with a weight `w[i]` and value `v[i]`, and a knapsack of capacity `W`,  
+find the maximum value that can be obtained by filling the knapsack, **allowing repeated use** of each item.
+
+#### Chain of Thought
+
+What are my subproblems?<br>
+Let `dp[j]` be the maximum value we can get with total capacity `j`.
+
+What are the decisions to solve each subproblem?<br>
+Try adding every item `i` such that its weight `w[i] <= j`.
+
+Recursive formulation – Basecase<br>
+- `dp[0] = 0` (value for 0 capacity is 0)
+- `dp[j] = max(dp[j], dp[j - w[i]] + v[i])` for all valid `i`
+
+How many subproblems?<br>
+One for each total weight `j` from `0` to `W` → `O(W)`
+
+Running time per subproblem?<br>
+We try all `n` items per weight → `O(n)`
+
+Overall running time?<br>
+`O(W × n)`
+
+#### Bottom-Up DP Code (Python)
+```python
+def knapsack_repetition(W, weights, values):
+    n = len(weights)
+    dp = [0] * (W + 1)
+
+    for j in range(1, W + 1):
+        for i in range(n):
+            if weights[i] <= j:
+                dp[j] = max(dp[j], dp[j - weights[i]] + values[i])
+    return dp[W]
+```
+
+#### Example
+
+Input:<br>
+- Capacity: `W = 8`
+- Items:  
+  - Item 1: weight = 3, value = 30  
+  - Item 2: weight = 4, value = 50  
+  - Item 3: weight = 5, value = 60
+
+Step-by-Step Table (dp):
+
+| Capacity | dp[j] |
+|----------|-------|
+| 0        | 0     |
+| 1        | 0     |
+| 2        | 0     |
+| 3        | 30    |
+| 4        | 50    |
+| 5        | 60    |
+| 6        | 60    |
+| 7        | 80    |
+| 8        | 90    |
+
+Final Result:
+**Maximum value** with capacity 8 = **90**
