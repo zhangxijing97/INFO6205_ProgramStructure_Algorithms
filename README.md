@@ -1876,13 +1876,13 @@ Update rule:
 dist(i, j, 1) = min( dist(i, 1, 0) + dist(1, j, 0), dist(i, j, 0) )
 ```
 
-| i → j | Calculation                       | Result |
-|-------|----------------------- -----------|--------|
-| 1 → 1 | min(0 + 0, 0)                     | 0 ✅    |
-| 1 → 2 | min(0 + 4, 4)                     | 4 ✅    |
-| 1 → 3 | min(0 + 10, 10)                   | 10 ✅   |
-| 2 → 3 | min(∞ + 10, 3)                    | 3 ✅    |
-| others | no improvement                   | stays the same |
+| i → j  | Calculation                         | Result         |
+|--------|-------------------------------------|----------------|
+| 1 → 1  | min(0 + 0, 0)                       | 0 ✅           |
+| 1 → 2  | min(0 + 4, 4)                       | 4 ✅           |
+| 1 → 3  | min(0 + 10, 10)                     | 10 ✅          |
+| 2 → 3  | min(∞ + 10, 3)                      | 3 ✅           |
+| others | no improvement                      | stays the same |
 
 #### 🔄 k = 2 (Allow node 2 as intermediate)
 
