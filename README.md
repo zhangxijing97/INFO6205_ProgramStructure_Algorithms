@@ -2157,28 +2157,71 @@ def knapsack_repetition(W, weights, values):
     return dp[W]
 ```
 
+- `W` - Total capacity of the knapsack
+- `weights` - List of item weights
+- `values` - List of item values
+- `n` - Number of items
+- `j` - Current knapsack capacity being computed
+- `i` - Current item being considered
+- `dp[j]` - Max value achievable with capacity j
+
 #### Example
 
-Input:<br>
-- Capacity: `W = 8`
-- Items:  
-  - Item 1: weight = 3, value = 30  
-  - Item 2: weight = 4, value = 50  
-  - Item 3: weight = 5, value = 60
+```
+W = 5
+weights = [1, 3]
+values = [10, 40]
+```
 
-Step-by-Step Table (dp):
+## Step-by-Step Table (dp Updates):
 
-| Capacity | dp[j] |
-|----------|-------|
-| 0        | 0     |
-| 1        | 0     |
-| 2        | 0     |
-| 3        | 30    |
-| 4        | 50    |
-| 5        | 60    |
-| 6        | 60    |
-| 7        | 80    |
-| 8        | 90    |
+Initial:
+```
+dp = [0, 0, 0, 0, 0, 0]
+```
+
+Iteration j = 1
+```
+i = 0 (weight 1 ≤ 1) → dp[1] = max(0, dp[0] + 10) = 10
+
+i = 1 (weight 3 > 1) → skip
+dp = [0, 10, 0, 0, 0, 0]
+```
+
+j = 2
+```
+i = 0 → dp[2] = max(0, dp[1] + 10) = 20
+
+i = 1 → skip
+dp = [0, 10, 20, 0, 0, 0]
+```
+
+j = 3
+```
+i = 0 → dp[3] = max(0, dp[2] + 10) = 30
+
+i = 1 → dp[3] = max(30, dp[0] + 40) = 40 ✅
+dp = [0, 10, 20, 40, 0, 0]
+```
+
+j = 4
+```
+i = 0 → dp[4] = max(0, dp[3] + 10) = 50
+
+i = 1 → dp[4] = max(50, dp[1] + 40) = 50
+dp = [0, 10, 20, 40, 50, 0]
+```
+
+j = 5
+```
+i = 0 → dp[5] = max(0, dp[4] + 10) = 60
+
+i = 1 → dp[5] = max(60, dp[2] + 40) = 60
+dp = [0, 10, 20, 40, 50, 60]
+```
+
+Final Answer:<br>
+dp[5] = 60
 
 Final Result:
 **Maximum value** with capacity 8 = **90**
