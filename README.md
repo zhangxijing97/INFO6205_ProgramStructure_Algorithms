@@ -1990,26 +1990,129 @@ def Floyd_Warshall(V, w):
 - **What is the overall running time?**  
   Multiply the number of subproblems by time per subproblem.
 
-### P5: Rod Cutting — Chain of Thought
+### P5: Rod Cutting
 
-- **What are my subproblems?**  
-  Let `r[n]` be the maximum revenue obtainable for a rod of length `n`.
+#### 📌 Problem:
+Given a rod of length `n` and a table of prices `p[i]` where `p[i]` is the price of a rod of length `i`,  
+find the **maximum revenue** you can obtain by cutting the rod into smaller pieces and selling them.
 
-- **What are the decisions to solve each subproblem?**  
-  Try all possible first cuts of length `i` (from 1 to n),  
-  and take the price `p[i] + r[n - i]`.
+#### 🔍 Subproblems:
+Let `r[n]` be the **maximum revenue** that can be obtained from a rod of length `n`.
 
-- **Recursive formulation – Base case**  
-```
-r[n] = max(p[i] + r[n - i]) for i = 1 to n
+#### 🧠 What are the decisions to solve each subproblem?
+For each length `n`, try all possible first cuts of size `i` (where `1 ≤ i ≤ n`).  
+Choose the best option:
+- Earn `p[i]` for the cut piece
+- Add the maximum revenue of the remaining rod: `r[n - i]`
+
+#### 🔁 Recursive formulation – Base Case:
+```python
 r[0] = 0
+r[n] = max(p[i] + r[n - i]) for i in 1 to n
+```
+#### 📦 How many subproblems?
+You compute one value for each rod length from `0` to `n`.
+
+- Total number of subproblems: **O(n)**
+
+#### ⏱ What is the running time per subproblem?
+To compute `r[n]`, you try all possible first cuts of length `i = 1 to n`.
+
+- Time per subproblem: **O(n)**
+
+#### ⏲ What is the overall running time?
+- `O(n)` subproblems × `O(n)` time per subproblem  
+➡️ **Total Time Complexity: O(n²)**
+
+#### Code
+```
+BottomUpCutRod(p, n):
+    let r[0...n] be a new array        # r[j] stores max revenue for rod of length j
+    r[0] = 0                           # base case: rod of length 0 has 0 revenue
+
+    for j = 1 to n:                   # build solution for rod length j from 1 to n
+        q = -∞                        # best revenue for current length j
+        for i = 1 to j:              # try all first cuts i (length of the first piece)
+            q = max(q, p[i] + r[j - i])  # revenue = price of length i + best for remaining
+        r[j] = q                      # save best revenue for length j
+
+    return r[n]                       # max revenue for rod of length n
 ```
 
-- **How many subproblems?**  
-One for each length `n` → **O(n)** subproblems.
+### 🪵 Rod Cutting - Bottom-Up Example
 
-- **What is the running time per subproblem?**  
-We try all `i = 1 to n` for each `n` → **O(n)** time per subproblem.
+#### 🎯 Problem
 
-- **What is the overall running time?**  
-**O(n^2)**
+We are given:
+- Rod length `n = 4`
+- Price list `p = [0, 1, 5, 8, 9]`
+
+This means:
+- Price for length 1 = 1  
+- Price for length 2 = 5  
+- Price for length 3 = 8  
+- Price for length 4 = 9
+
+#### 🔧 Initialization
+
+Create an array `r[0...4]` to store max revenues:
+
+```
+r = [0, ?, ?, ?, ?]
+```
+
+#### 🧮 Step-by-Step Computation
+
+j = 1<br>
+
+Try all first cuts `i` from 1 to 1:
+- i = 1: `q = max(-∞, p[1] + r[0]) = max(-∞, 1 + 0) = 1`
+
+```
+r[1] = 1
+r = [0, 1, ?, ?, ?]
+```
+
+j = 2<br>
+
+Try all first cuts `i` from 1 to 2:
+- i = 1: `q = max(-∞, 1 + 1) = 2`
+- i = 2: `q = max(2, 5 + 0) = 5`
+
+```
+r[2] = 5
+r = [0, 1, 5, ?, ?]
+```
+
+j = 3<br>
+
+Try all first cuts `i` from 1 to 3:
+- i = 1: `q = max(-∞, 1 + 5) = 6`
+- i = 2: `q = max(6, 5 + 1) = 6`
+- i = 3: `q = max(6, 8 + 0) = 8`
+
+```
+r[3] = 8
+r = [0, 1, 5, 8, ?]
+```
+
+j = 4<br>
+
+Try all first cuts `i` from 1 to 4:
+- i = 1: `q = max(-∞, 1 + 8) = 9`
+- i = 2: `q = max(9, 5 + 5) = 10`
+- i = 3: `q = max(10, 8 + 1) = 10`
+- i = 4: `q = max(10, 9 + 0) = 10`
+
+```
+r[4] = 10
+r = [0, 1, 5, 8, 10]
+```
+
+#### ✅ Final Result
+
+The maximum revenue for a rod of length **4** is:
+
+```
+r[4] = 10
+```
