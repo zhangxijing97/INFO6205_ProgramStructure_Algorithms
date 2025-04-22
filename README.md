@@ -1383,6 +1383,86 @@ Insert 40 ➔ Heap: [40, 30, 15, 10, 20]
   10   20
 ```
 
+## Lecture 9
+
+### Dijkstra
+```
+Dijkstra(G, s, ℓ):
+    Initialize Priority Queue Q
+    For each vertex v in V:
+        dist[v] ← ∞
+        Q.Insert(v)
+    dist[s] ← 0
+    While Q is not empty:
+        v ← Q.DeleteMin()
+        For each (v, w) ∈ E:
+            If dist[v] + ℓ(v, w) < dist[w]:
+                dist[w] ← dist[v] + ℓ(v, w)
+                Q.DecreaseKey(w)
+```
+
+- `dist[v]` — The shortest known distance from source `s` to node `v`.
+- `Q.DeleteMin()` — Extract the node with the **smallest distance** (greedy step).
+- `Q.DecreaseKey()` — If we find a shorter path to `w`, update its distance in the priority queue.
+- `ℓ(v, w)` — The length (or cost) of edge `(v → w)`.
+
+#### 📘 Example Graph
+
+```
+A → B (weight 1)
+A → C (weight 4)
+B → C (weight 2)
+B → D (weight 5)
+C → D (weight 1)
+```
+
+**Source node: A**
+
+#### 🔧 Initialization
+
+```
+dist[A] = 0 ← source
+dist[B] = ∞
+dist[C] = ∞
+dist[D] = ∞
+
+Priority Queue (Min Heap): [A, B, C, D]
+```
+
+#### 🧮 Step-by-Step Execution
+
+Step 1: Visit A (dist = 0)<br>
+- A → B: `dist[B] = min(∞, 0 + 1) = 1` ✅
+- A → C: `dist[C] = min(∞, 0 + 4) = 4` ✅
+```
+dist = { A: 0, B: 1, C: 4, D: ∞ } PQ = [B (1), C (4), D (∞)]
+```
+
+Step 2: Visit B (dist = 1)<br>
+- B → C: `dist[C] = min(4, 1 + 2) = 3` ✅
+- B → D: `dist[D] = min(∞, 1 + 5) = 6` ✅
+```
+dist = { A: 0, B: 1, C: 3, D: 6 } PQ = [C (3), D (6)]
+```
+
+Step 3: Visit C (dist = 3)<br>
+- C → D: `dist[D] = min(6, 3 + 1) = 4` ✅
+```
+dist = { A: 0, B: 1, C: 3, D: 4 } PQ = [D (4)]
+```
+
+Step 4: Visit D (dist = 4)<br>
+- D has no outgoing edges → done!
+
+Final Shortest Distances from A
+```
+A → A = 0
+A → B = 1
+A → C = 3
+A → D = 4
+```
+
+
 ## Lecture 11
 
 ### Dynamic Programming (DP) Steps
@@ -2222,6 +2302,3 @@ dp = [0, 10, 20, 40, 50, 60]
 
 Final Answer:<br>
 dp[5] = 60
-
-Final Result:
-**Maximum value** with capacity 8 = **90**
